@@ -99,7 +99,7 @@ class _LoginViewState extends State<_LoginView> with WidgetsBindingObserver {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'CarbonGauge',
+                        l10n.appName,
                         style: theme.textTheme.headlineMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: const Color(0xFF4A4A4A),

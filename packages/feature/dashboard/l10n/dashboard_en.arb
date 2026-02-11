@@ -1,0 +1,14 @@
+{
+  "@@locale": "en",
+  "appName": "CarbonGauge",
+  "deliveryList": "Delivery List",
+  "time": "Time",
+  "siteName": "Site Name",
+  "productName": "Product Name",
+  "quantity": "Qty",
+  "statusDelivered": "Delivered",
+  "statusCancelled": "Cancelled",
+  "onSiteConfirmation": "On-site Conf.",
+  "requiredSignature": " (Req. Sign)",
+  "noData": "No Data"
+}

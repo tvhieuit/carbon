@@ -9,6 +9,9 @@ class AuthLocalizationsJa extends AuthLocalizations {
   AuthLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
+  String get appName => 'CarbonGauge';
+
+  @override
   String get loginTitle => '配達スタッフログイン';
 
   @override

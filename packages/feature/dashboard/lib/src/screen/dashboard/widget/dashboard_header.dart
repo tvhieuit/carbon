@@ -1,3 +1,4 @@
+import 'package:feature_dashboard/src/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class DashboardHeader extends StatelessWidget {
@@ -9,7 +10,7 @@ class DashboardHeader extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
-          _buildLogo(),
+          _buildLogo(context),
           const Spacer(),
           IconButton(
             icon: const Icon(Icons.qr_code_scanner, size: 28),
@@ -29,7 +30,7 @@ class DashboardHeader extends StatelessWidget {
     );
   }
 
-  Widget _buildLogo() {
+  Widget _buildLogo(BuildContext context) {
     return Row(
       children: [
         Container(
@@ -42,9 +43,9 @@ class DashboardHeader extends StatelessWidget {
           child: const Icon(Icons.water_drop, color: Colors.white, size: 20),
         ),
         const SizedBox(width: 8),
-        const Text(
-          'CarbonGauge',
-          style: TextStyle(
+        Text(
+          context.dashboardL10n.appName,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.black,

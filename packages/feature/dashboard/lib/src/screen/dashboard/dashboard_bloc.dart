@@ -21,13 +21,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final AppRoute _appRoute;
   final AppToast _toast;
 
-  DashboardBloc(
-    this._dashboardUseCase,
-    this._router,
-    this._appRoute,
-    this._toast,
-      @tenantIdNamed String? tenantId
-  ) : super(DashboardState.initial(tenantId)) {
+  DashboardBloc(this._dashboardUseCase, this._router, this._appRoute, this._toast, @tenantIdNamed String? tenantId)
+    : super(DashboardState.initial(tenantId)) {
     on<_Started>(_onStarted);
     on<_PullRefresh>(_onPullRefresh);
     on<_CalendarDaySelected>(_onCalendarDaySelected);
@@ -42,7 +37,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     emit(state.copyWith(isLoading: true));
 
     try {
-
       final result = await _dashboardUseCase.fetchStores(
         page: 1,
         pageSize: 1000,

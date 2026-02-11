@@ -1,0 +1,14 @@
+{
+  "@@locale": "ja",
+  "appName": "CarbonGauge",
+  "deliveryList": "納品一覧",
+  "time": "時間",
+  "siteName": "現場名",
+  "productName": "商品名",
+  "quantity": "数量",
+  "statusDelivered": "納品済",
+  "statusCancelled": "キャンセル",
+  "onSiteConfirmation": "現地確認",
+  "requiredSignature": " (要サイン)",
+  "noData": "データなし"
+}

@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  
+  "appName": "CarbonGauge",
   "loginTitle": "Login",
   "@loginTitle": {
     "description": "Title for login page"

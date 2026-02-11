@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:feature_dashboard/src/l10n/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'dashboard_bloc.dart';
@@ -33,9 +34,9 @@ class DashboardPage extends StatelessWidget implements AutoRouteWrapper {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        '納品一覧',
-                        style: TextStyle(
+                      Text(
+                        context.dashboardL10n.deliveryList,
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
@@ -166,7 +167,7 @@ class _StaffFilter extends StatelessWidget {
                     enabled: false,
                     child: Center(
                       child: Text(
-                        'No Data',
+                        context.dashboardL10n.noData,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey.shade600,

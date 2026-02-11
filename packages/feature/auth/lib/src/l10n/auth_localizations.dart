@@ -92,6 +92,12 @@ abstract class AuthLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('ja')];
 
+  /// No description provided for @appName.
+  ///
+  /// In en, this message translates to:
+  /// **'CarbonGauge'**
+  String get appName;
+
   /// Title for login page
   ///
   /// In en, this message translates to:

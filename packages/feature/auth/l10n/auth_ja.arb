@@ -1,5 +1,6 @@
 {
   "@@locale": "ja",
+  "appName": "CarbonGauge",
   "loginTitle": "配達スタッフログイン",
   "@loginTitle": {
     "description": "Title for login page"

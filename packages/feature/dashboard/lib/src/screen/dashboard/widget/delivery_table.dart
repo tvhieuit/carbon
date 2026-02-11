@@ -1,4 +1,5 @@
 import 'package:domain/domain.dart';
+import 'package:feature_dashboard/src/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class DeliveryTable extends StatelessWidget {
@@ -10,6 +11,7 @@ class DeliveryTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final timeSlots = _generateTimeSlots();
     final groupedOrders = _groupOrders(timeSlots, orders);
+    final l10n = context.dashboardL10n;
 
     return Container(
       decoration: BoxDecoration(
@@ -19,7 +21,7 @@ class DeliveryTable extends StatelessWidget {
       ),
       child: Column(
         children: [
-          _buildHeader(),
+          _buildHeader(l10n),
           Expanded(
             child: ListView.separated(
               itemCount: timeSlots.length,
@@ -27,7 +29,7 @@ class DeliveryTable extends StatelessWidget {
               itemBuilder: (context, index) {
                 final time = timeSlots[index];
                 final slotOrders = groupedOrders[time] ?? [];
-                return _buildTimeSlotRow(context, time, slotOrders);
+                return _buildTimeSlotRow(context, l10n, time, slotOrders);
               },
             ),
           ),
@@ -36,16 +38,16 @@ class DeliveryTable extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(DashboardLocalizations l10n) {
     return Container(
       color: Colors.grey.shade100,
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         children: [
-          _buildHeaderCell('時間', flex: 1),
-          _buildHeaderCell('現場名', flex: 3),
-          _buildHeaderCell('商品名', flex: 2),
-          _buildHeaderCell('数量', flex: 1, isLast: true),
+          _buildHeaderCell(l10n.time, flex: 1),
+          _buildHeaderCell(l10n.siteName, flex: 3),
+          _buildHeaderCell(l10n.productName, flex: 2),
+          _buildHeaderCell(l10n.quantity, flex: 1, isLast: true),
         ],
       ),
     );
@@ -65,18 +67,24 @@ class DeliveryTable extends StatelessWidget {
     );
   }
 
-  Widget _buildTimeSlotRow(BuildContext context, String time, List<OrderEntity> orders) {
+  Widget _buildTimeSlotRow(BuildContext context, DashboardLocalizations l10n, String time, List<OrderEntity> orders) {
     if (orders.isEmpty) {
       return IntrinsicHeight(
         child: Row(
           children: [
-            _buildCell(time, flex: 1, center: true, textStyle: const TextStyle(fontSize: 12, color: Colors.black)),
+            _buildCell(
+              l10n,
+              time,
+              flex: 1,
+              center: true,
+              textStyle: const TextStyle(fontSize: 12, color: Colors.black),
+            ),
             const VerticalDivider(width: 1),
-            _buildCell('', flex: 3),
+            _buildCell(l10n, '', flex: 3),
             const VerticalDivider(width: 1),
-            _buildCell('', flex: 2),
+            _buildCell(l10n, '', flex: 2),
             const VerticalDivider(width: 1),
-            _buildCell('', flex: 1),
+            _buildCell(l10n, '', flex: 1),
           ],
         ),
       );
@@ -85,7 +93,7 @@ class DeliveryTable extends StatelessWidget {
     return Column(
       children: orders.map((order) {
         final orderLines = order.orderLines;
-        final bgColor = _getBgColor(order);
+        final bgColor = _getBgColor(l10n, order);
         final showRequiredSign = order.signatureDate == null;
 
         return IntrinsicHeight(
@@ -94,9 +102,16 @@ class DeliveryTable extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildCell(time, flex: 1, center: true, textStyle: const TextStyle(fontSize: 12, color: Colors.black)),
+                _buildCell(
+                  l10n,
+                  time,
+                  flex: 1,
+                  center: true,
+                  textStyle: const TextStyle(fontSize: 12, color: Colors.black),
+                ),
                 const VerticalDivider(width: 1),
                 _buildCell(
+                  l10n,
                   order.constructionSiteName,
                   flex: 3,
                   showRequiredSign: showRequiredSign,
@@ -104,7 +119,7 @@ class DeliveryTable extends StatelessWidget {
                   textStyle: const TextStyle(fontSize: 13, color: Color(0xFF1E293B)),
                 ),
                 const VerticalDivider(width: 1),
-                _buildProductColumn(orderLines, flex: 3),
+                _buildProductColumn(l10n, orderLines, flex: 3),
               ],
             ),
           ),
@@ -113,11 +128,11 @@ class DeliveryTable extends StatelessWidget {
     );
   }
 
-  Color? _getBgColor(OrderEntity order) {
-    if (order.deliveryStatus == 'キャンセル') {
+  Color? _getBgColor(DashboardLocalizations l10n, OrderEntity order) {
+    if (order.deliveryStatus == l10n.statusCancelled) {
       return Colors.grey.shade300;
     }
-    if (order.receiptFileId != null || order.deliveryStatus == '納品済') {
+    if (order.receiptFileId != null || order.deliveryStatus == l10n.statusDelivered) {
       return Colors.green.shade50;
     }
     try {
@@ -139,7 +154,7 @@ class DeliveryTable extends StatelessWidget {
     return null;
   }
 
-  Widget _buildProductColumn(List<OrderLineEntity> lines, {required int flex}) {
+  Widget _buildProductColumn(DashboardLocalizations l10n, List<OrderLineEntity> lines, {required int flex}) {
     return Expanded(
       flex: flex,
       child: Column(
@@ -147,9 +162,9 @@ class DeliveryTable extends StatelessWidget {
             ? [
                 Row(
                   children: [
-                    _buildCell('', flex: 2),
+                    _buildCell(l10n, '', flex: 2),
                     const VerticalDivider(width: 1),
-                    _buildCell('', flex: 1),
+                    _buildCell(l10n, '', flex: 1),
                   ],
                 ),
               ]
@@ -163,13 +178,15 @@ class DeliveryTable extends StatelessWidget {
                   child: Row(
                     children: [
                       _buildCell(
+                        l10n,
                         line.productName ?? '-',
                         flex: 2,
                         textStyle: const TextStyle(fontSize: 13, color: Color(0xFF475569)),
                       ),
                       const VerticalDivider(width: 1),
                       _buildCell(
-                        line.quantity != null ? '${line.quantity!.toInt()}' : '現地確認',
+                        l10n,
+                        line.quantity != null ? '${line.quantity!.toInt()}' : l10n.onSiteConfirmation,
                         flex: 1,
                         alignRight: true,
                         textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.black),
@@ -183,6 +200,7 @@ class DeliveryTable extends StatelessWidget {
   }
 
   Widget _buildCell(
+    DashboardLocalizations l10n,
     String text, {
     required int flex,
     bool center = false,
@@ -211,9 +229,9 @@ class DeliveryTable extends StatelessWidget {
               ],
               TextSpan(text: text),
               if (showRequiredSign)
-                const TextSpan(
-                  text: ' (要サイン)',
-                  style: TextStyle(color: Colors.red, fontSize: 13),
+                TextSpan(
+                  text: l10n.requiredSignature,
+                  style: const TextStyle(color: Colors.red, fontSize: 13),
                 ),
             ],
           ),
