@@ -12,6 +12,9 @@ abstract class AuthRepository {
   /// Returns [AuthToken] on success.
   Future<Result<AuthToken>> login(LoginCredentials credentials);
 
+  /// Gets the current authenticated user's information.
+  Future<Result<MeEntity>> getMe();
+
   /// Registers a new user.
   ///
   /// Returns [AuthToken] on success (auto-login after register).

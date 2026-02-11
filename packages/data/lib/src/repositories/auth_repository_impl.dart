@@ -36,6 +36,19 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Result<MeEntity>> getMe() async {
+    try {
+      final response = await _dio.get('/auth/me');
+      final me = MeEntity.fromJson(response.data);
+      return Result.success(me);
+    } on DioException catch (e) {
+      return Result.failure(_handleDioError(e));
+    } catch (e) {
+      return Result.failure(Failure.unknown(message: e.toString()));
+    }
+  }
+
+  @override
   Future<Result<AuthToken>> register(RegisterCredentials credentials) async {
     try {
       final response = await _dio.post(

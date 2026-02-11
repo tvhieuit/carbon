@@ -65,3 +65,31 @@ The server returns an `AuthToken` object containing user information and access/
 - **Constants**: The base URL is defined in `Constants.apiUrl` within `apps/flutter_app/lib/utils/constants.dart`.
 - **Repository**: `AuthRepositoryImpl` handles the API call and mapping in `packages/data/lib/src/repositories/auth_repository_impl.dart`.
 - **Interceptor**: `AuthInterceptor` in `packages/data/lib/src/network/auth_interceptor.dart` ensures all required headers are present.
+
+## Get Me API
+
+- **URL**: `https://co2-api.118.69.67.72.nip.io/api/v1/auth/me`
+- **Method**: `GET`
+- **Authorization**: `Bearer <access_token>`
+
+### Success Response (200 OK)
+
+```json
+{
+    "id": "cd3c410b-b7fe-44d0-a35e-692938f3a80a",
+    "email": "tuannh479+20@gmail.com",
+    "is_active": true,
+    "user_type": "STAFF",
+    "role_id": "1daec5ae-b4ac-4c49-963c-516dc2aa513d",
+    "permissions": ["staff__order__show", "staff__order__list", "staff__receipt__create"],
+    "is_admin": false,
+    "user_detail": {
+        "id": "7a7fc389-5527-422d-b465-3431c12bcc93",
+        "name": "西村ゆう",
+        "phone": "0963729919",
+        "is_inhourse": true,
+        "tenant_store_id": "c404371a-b190-4bc1-a2cb-4e1578fd5f8f",
+        "company_id": null
+    }
+}
+```
