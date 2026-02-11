@@ -24,6 +24,7 @@ abstract class DataModule {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'x-user-type': 'STAFF',
         },
       ),
     );
@@ -46,6 +47,7 @@ abstract class DataModule {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'x-user-type': 'STAFF',
         },
       ),
     );
