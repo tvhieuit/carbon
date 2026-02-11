@@ -23,6 +23,10 @@ class AuthInterceptor extends Interceptor {
       options.headers['Authorization'] = 'Bearer $token';
     }
 
+    options.headers['x-user-type'] = 'STAFF';
+    options.headers['Accept-Language'] = 'ja-JP';
+    options.headers['x-provider'] = '';
+
     handler.next(options);
   }
 

@@ -77,8 +77,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(state.copyWith(isLoading: false, error: e.message));
       _toast.show(e.message, type: AppToastType.error);
     } catch (e) {
+
       emit(state.copyWith(isLoading: false, error: 'An unexpected error occurred'));
       _toast.show('An unexpected error occurred', type: AppToastType.error);
+      rethrow;
     }
   }
 
