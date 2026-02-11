@@ -227,7 +227,7 @@ class DeliveryTable extends StatelessWidget {
   Map<String, List<OrderEntity>> _groupOrders(List<String> slots, List<OrderEntity> orders) {
     final map = <String, List<OrderEntity>>{};
     for (var order in orders) {
-      // Logic: map refuelingFromTime to nearest slot
+      // Logic: map refuelingFromTime (HH:mm:ss) to nearest slot (HH:00)
       final hour = order.refuelingFromTime.split(':').first;
       final slotKey = '${hour.padLeft(2, '0')}:00';
       if (slots.contains(slotKey)) {

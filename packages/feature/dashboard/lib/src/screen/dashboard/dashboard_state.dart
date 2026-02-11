@@ -17,12 +17,14 @@ sealed class DashboardState with _$DashboardState {
     @Default([]) List<StaffEntity> stores,
     String? selectedStaffId,
     String? selectedStoreId,
+    String? tenantId,
   }) = _DashboardState;
 
-  factory DashboardState.initial() => DashboardState(
+  factory DashboardState.initial(String? tenantId) => DashboardState(
     selectedDate: DateTime.now(),
     focusedDate: DateTime.now(),
     firstDay: DateTime(2020),
     lastDay: DateTime(2050),
+    tenantId: tenantId,
   );
 }

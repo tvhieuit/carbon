@@ -7,6 +7,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:feature_auth/auth.dart';
 import 'package:use_cases/use_cases.dart';
+// Note: In a real production app, tenantId should be provided via DI or Auth state.
+// For now, we will use the correct UUID directly as requested.
 
 part 'dashboard_event.dart';
 part 'dashboard_state.dart';
@@ -24,7 +26,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     this._router,
     this._appRoute,
     this._toast,
-  ) : super(DashboardState.initial()) {
+      @tenantIdNamed String? tenantId
+  ) : super(DashboardState.initial(tenantId)) {
     on<_Started>(_onStarted);
     on<_PullRefresh>(_onPullRefresh);
     on<_CalendarDaySelected>(_onCalendarDaySelected);
@@ -39,13 +42,11 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     emit(state.copyWith(isLoading: true));
 
     try {
-      // TODO: Get real tenantId from auth state
-      const tenantId = '1';
 
       final result = await _dashboardUseCase.fetchStores(
         page: 1,
         pageSize: 1000,
-        tenantId: tenantId,
+        tenantId: state.tenantId ?? '',
       );
 
       if (result.isSuccess) {

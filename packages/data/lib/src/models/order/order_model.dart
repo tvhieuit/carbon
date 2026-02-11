@@ -6,7 +6,7 @@ part 'order_model.freezed.dart';
 part 'order_model.g.dart';
 
 @modelFreezed
-sealed  class OrderModel with _$OrderModel {
+sealed class OrderModel with _$OrderModel {
   const OrderModel._();
 
   const factory OrderModel({
@@ -18,7 +18,7 @@ sealed  class OrderModel with _$OrderModel {
     @JsonKey(name: 'construction_site_name') required String constructionSiteName,
     @JsonKey(name: 'delivery_status') required String deliveryStatus,
     @JsonKey(name: 'receipt_file_id') String? receiptFileId,
-    @JsonKey(name: 'signature_date') String? signatureDate,
+    @JsonKey(name: 'receipt_signature_date') String? signatureDate,
     @JsonKey(name: 'product_id') String? productId,
     @JsonKey(name: 'order_lines') @Default([]) List<OrderLineModel> orderLines,
   }) = _OrderModel;
