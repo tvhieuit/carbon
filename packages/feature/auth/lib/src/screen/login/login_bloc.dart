@@ -57,7 +57,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         password: event.password,
       );
       final result = await _loginUseCase(credentials);
-      assert(result.isFailure, result.failureOrNull);
       final token = result.dataOrThrow;
 
       // Save email to history
@@ -72,12 +71,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           fieldError: null,
         ),
       );
-      _router.replaceAll([_appRoute.home]);
+      // _router.replaceAll([_appRoute.home]);
     } on Failure catch (e) {
       emit(state.copyWith(isLoading: false, error: e.message));
       _toast.show(e.message, type: AppToastType.error);
+      rethrow;
     } catch (e) {
-
       emit(state.copyWith(isLoading: false, error: 'An unexpected error occurred'));
       _toast.show('An unexpected error occurred', type: AppToastType.error);
       rethrow;
