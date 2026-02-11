@@ -16,6 +16,7 @@ workspace:
   - packages/use_cases
   - packages/feature/auth
   - packages/feature/app_settings
+  - packages/feature/dashboard
   - packages/app_core
 
 dev_dependencies:

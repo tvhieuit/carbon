@@ -5,6 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Flutter App - Development",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "cwd": "${workspaceFolder}/apps/flutter_app",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "dev",
+                "--dart-define-from-file=configs/dev.json"
+            ]
+        },
+        {
             "name": "Flutter App - Run (Android) - No Flavor",
             "request": "launch",
             "type": "dart",
@@ -34,8 +47,6 @@
             "cwd": "${workspaceFolder}/apps/flutter_app",
             "program": "lib/main.dart",
             "args": [
-                "--flavor",
-                "stg",
                 "--dart-define-from-file=configs/stg.json"
             ]
         },
@@ -47,8 +58,6 @@
             "cwd": "${workspaceFolder}/apps/flutter_app",
             "program": "lib/main.dart",
             "args": [
-                "--flavor",
-                "beta",
                 "--dart-define-from-file=configs/beta.json"
             ]
         },

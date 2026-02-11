@@ -19,10 +19,12 @@ class AppRoute {
   final PageRouteInfo login;
   final PageRouteInfo register;
   final PageRouteInfo home;
+  final PageRouteInfo dashboard;
 
   const AppRoute({
     required this.login,
     required this.register,
     required this.home,
+    required this.dashboard,
   });
 }

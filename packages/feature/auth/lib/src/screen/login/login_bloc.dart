@@ -71,7 +71,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           fieldError: null,
         ),
       );
-      // _router.replaceAll([_appRoute.home]);
+      _router.replaceAll([_appRoute.dashboard]);
     } on Failure catch (e) {
       emit(state.copyWith(isLoading: false, error: e.message));
       _toast.show(e.message, type: AppToastType.error);

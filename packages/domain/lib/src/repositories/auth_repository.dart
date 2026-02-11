@@ -1,6 +1,7 @@
 import 'package:app_core/app_core.dart';
 import '../entities/auth/auth_credentials.dart';
 import '../entities/auth/auth_token.dart';
+import '../entities/auth/me_entity.dart';
 
 /// Authentication repository interface.
 ///

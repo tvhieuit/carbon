@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'app_router.gr.dart';
 import 'auth_routes.dart';
 import 'settings_routes.dart';
+import 'dashboard_routes.dart';
 
 @singleton
 @AutoRouterConfig(replaceInRouteName: 'Page,Route')
@@ -25,6 +26,9 @@ class AppRouter extends RootStackRouter {
 
     // User screen
     AutoRoute(page: UserRoute.page),
+
+    // Dashboard screen
+    AutoRoute(page: DashboardRoute.page, path: '/dashboard'),
 
     // App Settings (Bottom Sheet)
     AppBottomSheetRoute(page: AppSettingsRoute.page),

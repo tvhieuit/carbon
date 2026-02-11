@@ -3,6 +3,7 @@ import 'package:app_widget/app_widget.dart';
 import 'package:data/data.dart';
 import 'package:feature_app_settings/app_settings.dart';
 import 'package:feature_auth/auth.dart';
+import 'package:feature_dashboard/feature_dashboard.dart';
 import 'package:use_cases/use_cases.dart';
 
 import 'package:get_it/get_it.dart';
@@ -34,6 +35,9 @@ void configureDependencies() {
 
   // Initialize auth package dependencies
   initAuthPackage();
+
+  // Initialize dashboard package dependencies
+  initDashboardPackage();
 
   // Initialize app settings package dependencies
   initAppSettingsPackage();

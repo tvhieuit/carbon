@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import '../app/app_router.dart';
 import '../app/app_router.gr.dart';
 import '../app/auth_routes.dart';
+import '../app/dashboard_routes.dart';
 
 /// Module for registering routing dependencies
 @module
@@ -14,6 +15,7 @@ abstract class RouteModule {
     login: LoginRoute(),
     register: RegisterRoute(),
     home: UserRoute(),
+    dashboard: DashboardRoute(),
   );
 
   @lazySingleton
