@@ -1,11 +1,12 @@
+import 'package:app_core/app_core.dart';
 import 'package:domain/domain.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'staff_model.freezed.dart';
 part 'staff_model.g.dart';
 
-@freezed
-class StaffModel with _$StaffModel {
+@modelFreezed
+sealed class StaffModel with _$StaffModel {
   const StaffModel._();
 
   const factory StaffModel({

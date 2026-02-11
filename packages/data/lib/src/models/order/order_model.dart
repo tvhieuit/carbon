@@ -1,11 +1,12 @@
+import 'package:app_core/app_core.dart';
 import 'package:domain/domain.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'order_model.freezed.dart';
 part 'order_model.g.dart';
 
-@freezed
-class OrderModel with _$OrderModel {
+@modelFreezed
+sealed  class OrderModel with _$OrderModel {
   const OrderModel._();
 
   const factory OrderModel({
@@ -39,8 +40,8 @@ class OrderModel with _$OrderModel {
   );
 }
 
-@freezed
-class OrderLineModel with _$OrderLineModel {
+@modelFreezed
+sealed class OrderLineModel with _$OrderLineModel {
   const OrderLineModel._();
 
   const factory OrderLineModel({

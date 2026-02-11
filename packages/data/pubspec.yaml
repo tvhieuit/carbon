@@ -36,3 +36,5 @@ dev_dependencies:
   # Code Generation
   build_runner: any
   injectable_generator: any
+  freezed: any
+  json_serializable: any
