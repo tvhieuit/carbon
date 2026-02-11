@@ -110,6 +110,8 @@ class _StoreFilter extends StatelessWidget {
             filled: true,
             fillColor: Colors.grey.shade200,
           ),
+          isExpanded: true,
+          isDense: true,
           hint: const Text(''),
           items: state.stores.map((store) {
             return DropdownMenuItem<String>(
@@ -154,6 +156,8 @@ class _StaffFilter extends StatelessWidget {
             filled: true,
             fillColor: Colors.grey.shade200,
           ),
+          isExpanded: true,
+          isDense: true,
           hint: const Text(''),
           items: state.staffs.isEmpty
               ? [
