@@ -156,7 +156,3 @@ melos:
 # - Testing new versions
 # - Ensuring all packages use exact same version
 #
-# Example:
-# dependency_overrides:
-#   freezed_annotation: 3.1.0
-#   json_annotation: 4.9.0

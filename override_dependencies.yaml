@@ -46,6 +46,7 @@ json_serializable: ^6.12.0
 injectable_generator: ^2.12.0
 auto_route_generator: ^10.4.0
 retrofit_generator: ^10.2.1
+flutter_gen_runner: ^5.12.0
 
 # =============================================================================
 # NETWORKING
@@ -67,6 +68,7 @@ fluttertoast: ^8.2.5
 # =============================================================================
 connectivity_plus: ^7.0.0
 permission_handler: ^12.0.1
+flutter_svg: ^2.0.10+1
 
 # =============================================================================
 # TESTING

@@ -23,6 +23,9 @@ dependencies:
   # State Management
   flutter_bloc: any
   
+  # Assets
+  flutter_svg: any
+  
   # Dependency Injection
   get_it: any
   injectable: any
@@ -49,6 +52,20 @@ dev_dependencies:
   json_serializable: any
   injectable_generator: any
   auto_route_generator: any
+  flutter_gen_runner: any
 
 flutter:
   generate: true
+  assets:
+    - assets/image/splash.svg
+
+flutter_gen:
+  line_length: 250
+  output: lib/assets/
+
+  assets:
+    outputs:
+      package_parameter_enabled: false
+      class_name: AuthAsset
+  integrations:
+    flutter_svg: true
