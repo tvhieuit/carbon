@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'dashboard_bloc.dart';
-import 'widget/calendar_widget.dart';
-import 'widget/order_card.dart';
+import 'widget/dashboard_header.dart';
+import 'widget/date_selector.dart';
+import 'widget/delivery_table.dart';
 
 @RoutePage()
 class DashboardPage extends StatelessWidget implements AutoRouteWrapper {
@@ -13,7 +14,7 @@ class DashboardPage extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetIt.instance<DashboardBloc>(),
+      create: (context) => GetIt.instance<DashboardBloc>()..add(const DashboardEvent.started()),
       child: this,
     );
   }
@@ -21,32 +22,61 @@ class DashboardPage extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dashboard'), // TODO: Use localization
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              context.read<DashboardBloc>().add(const DashboardEvent.pullRefresh());
-            },
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      backgroundColor: const Color(0xFFF5F6FA), // Light grey background like design
+      body: SafeArea(
         child: Column(
           children: [
-            CalendarWidget(
-              onDateSelected: (selectedDate, focusedDate) {
-                context.read<DashboardBloc>().add(
-                  DashboardEvent.calendarDaySelected(selectedDate, focusedDate),
-                );
-              },
+            const DashboardHeader(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        '納品一覧',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      BlocBuilder<DashboardBloc, DashboardState>(
+                        buildWhen: (p, c) => p.selectedDate != c.selectedDate,
+                        builder: (context, state) {
+                          return DateSelector(
+                            selectedDate: state.selectedDate,
+                            onPrevious: () {
+                              final prevDate = state.selectedDate.subtract(const Duration(days: 1));
+                              context.read<DashboardBloc>().add(
+                                DashboardEvent.calendarDaySelected(prevDate, prevDate),
+                              );
+                            },
+                            onNext: () {
+                              final nextDate = state.selectedDate.add(const Duration(days: 1));
+                              context.read<DashboardBloc>().add(
+                                DashboardEvent.calendarDaySelected(nextDate, nextDate),
+                              );
+                            },
+                            onTap: () {
+                              // TODO: Show calendar picker or navigate back
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16.0),
+                  Row(
+                    children: [
+                      Expanded(child: _StoreFilter()),
+                      const SizedBox(width: 12),
+                      Expanded(child: _StaffFilter()),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 16.0),
-            _StoreFilter(),
-            const SizedBox(height: 16.0),
-            _StaffFilter(),
             const SizedBox(height: 16.0),
             const Expanded(child: _OrderList()),
           ],
@@ -67,6 +97,19 @@ class _StoreFilter extends StatelessWidget {
         }
         return DropdownButtonFormField<String>(
           value: state.selectedStoreId,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.grey.shade300),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.grey.shade300),
+            ),
+            filled: true,
+            fillColor: Colors.white,
+          ),
           hint: const Text('Select Store'),
           items: state.stores.map((store) {
             return DropdownMenuItem<String>(
@@ -96,6 +139,19 @@ class _StaffFilter extends StatelessWidget {
         }
         return DropdownButtonFormField<String>(
           value: state.selectedStaffId,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.grey.shade300),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: Colors.grey.shade300),
+            ),
+            filled: true,
+            fillColor: Colors.white,
+          ),
           hint: const Text('Select Staff'),
           items: state.staffs.map((staff) {
             return DropdownMenuItem<String>(
@@ -129,13 +185,9 @@ class _OrderList extends StatelessWidget {
           return const Center(child: Text('No orders found'));
         }
 
-        // TODO: Implement grouping logic here or in BLoC
-        return ListView.builder(
-          itemCount: state.orders.length,
-          itemBuilder: (context, index) {
-            final order = state.orders[index];
-            return OrderCard(order: order);
-          },
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: DeliveryTable(orders: state.orders),
         );
       },
     );

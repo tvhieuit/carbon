@@ -83,13 +83,14 @@ class AppToast {
     Duration duration = const Duration(seconds: 2),
     AppToastPosition position = AppToastPosition.bottom,
   }) {
-    show(
-      message,
-      type: AppToastType.error,
-      title: title,
-      duration: duration,
-      position: position,
-    );
+    print('error $message');
+    // show(
+    //   message,
+    //   type: AppToastType.error,
+    //   title: title,
+    //   duration: duration,
+    //   position: position,
+    // );
   }
 
   /// Show warning toast (orange)
