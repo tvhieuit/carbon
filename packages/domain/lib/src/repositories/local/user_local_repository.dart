@@ -35,4 +35,10 @@ abstract class UserLocalRepository {
 
   /// Clears all user-related data (logout)
   Future<Result<void>> clearAllUserData();
+
+  /// Gets email history from cache
+  Future<Result<List<String>>> getEmailHistory();
+
+  /// Saves email to history cache
+  Future<Result<void>> saveEmailToHistory(String email);
 }

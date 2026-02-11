@@ -10,6 +10,7 @@ sealed class LoginState with _$LoginState {
     @Default(false) bool isSuccess,
     @Default(true) bool obscurePassword,
     AuthToken? token,
+    @Default([]) List<String> emailHistory,
     String? error,
     String? fieldError,
   }) = _LoginState;

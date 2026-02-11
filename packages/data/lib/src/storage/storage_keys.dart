@@ -11,6 +11,7 @@ abstract class StorageKeys {
   static const String currentUser = 'current_user';
   static const String userId = 'user_id';
   static const String userPreferences = 'user_preferences';
+  static const String emailHistory = 'email_history';
 
   // APP SETTINGS
   static const String themeMode = 'theme_mode';

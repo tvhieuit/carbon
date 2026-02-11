@@ -20,20 +20,32 @@ part 'login_state.dart';
 @injectable
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUseCase _loginUseCase;
+  final UserLocalRepository _userLocalRepository;
   final StackRouter _router;
   final AppRoute _appRoute;
   final AppToast _toast;
 
   LoginBloc(
     this._loginUseCase,
+    this._userLocalRepository,
     this._router,
     this._appRoute,
     this._toast,
   ) : super(LoginState.initial()) {
+    on(_onStarted);
     on(_onLogin);
     on(_onRegister);
     on(_onForgotPassword);
     on(_onObscurePasswordToggle);
+
+    add(const LoginEvent.started());
+  }
+
+  Future<void> _onStarted(_LoginEventStarted event, emit) async {
+    final result = await _userLocalRepository.getEmailHistory();
+    if (result.isSuccess) {
+      emit(state.copyWith(emailHistory: result.dataOrThrow));
+    }
   }
 
   /// Handles login event
@@ -47,6 +59,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final result = await _loginUseCase(credentials);
       assert(result.isFailure, result.failureOrNull);
       final token = result.dataOrThrow;
+
+      // Save email to history
+      await _userLocalRepository.saveEmailToHistory(event.email);
+
       emit(
         state.copyWith(
           isLoading: false,

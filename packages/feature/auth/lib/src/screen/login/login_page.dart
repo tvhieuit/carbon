@@ -198,32 +198,86 @@ class _LoginViewState extends State<_LoginView> {
 
   Widget _emailField(AuthLocalizations l10n) {
     return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (prev, curr) => prev.fieldError != curr.fieldError || prev.error != curr.error,
+      buildWhen: (prev, curr) =>
+          prev.fieldError != curr.fieldError || prev.error != curr.error || prev.emailHistory != curr.emailHistory,
       builder: (context, state) {
-        return TextFormField(
-          controller: _emailController,
-          keyboardType: TextInputType.emailAddress,
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
-            hintText: l10n.emailHint,
-            hintStyle: const TextStyle(color: Color(0xFFCCCCCC)),
-            filled: true,
-            fillColor: Colors.white,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFFEEEEEE)),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFFEEEEEE)),
-            ),
-            errorText: state.fieldError == 'email' ? state.error : null,
-          ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return l10n.emailRequired;
+        return Autocomplete<String>(
+          optionsBuilder: (TextEditingValue textEditingValue) {
+            if (textEditingValue.text.isEmpty) {
+              return state.emailHistory;
             }
-            return null;
+            return state.emailHistory.where((String option) {
+              return option.contains(textEditingValue.text.toLowerCase());
+            });
+          },
+          onSelected: (String selection) {
+            _emailController.text = selection;
+          },
+          fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
+            // Sync with our controller
+            if (_emailController.text != controller.text && _emailController.text.isEmpty) {
+              _emailController.text = controller.text;
+            }
+            controller.addListener(() {
+              _emailController.text = controller.text;
+            });
+
+            return TextFormField(
+              controller: controller,
+              focusNode: focusNode,
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                hintText: l10n.emailHint,
+                hintStyle: const TextStyle(color: Color(0xFFCCCCCC)),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(color: Color(0xFFEEEEEE)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(color: Color(0xFFEEEEEE)),
+                ),
+                errorText: state.fieldError == 'email' ? state.error : null,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return l10n.emailRequired;
+                }
+                return null;
+              },
+              onFieldSubmitted: (value) {
+                onFieldSubmitted();
+              },
+            );
+          },
+          optionsViewBuilder: (context, onSelected, options) {
+            return Align(
+              alignment: Alignment.topLeft,
+              child: Material(
+                elevation: 4.0,
+                borderRadius: BorderRadius.circular(12),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width - 64, // horizontal padding * 2
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    itemCount: options.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final String option = options.elementAt(index);
+                      return ListTile(
+                        title: Text(option),
+                        onTap: () {
+                          onSelected(option);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+            );
           },
         );
       },

@@ -137,4 +137,37 @@ class UserLocalRepositoryImpl implements UserLocalRepository {
       return Result.failure(Failure.cache(message: 'Failed to clear all user data: $e'));
     }
   }
+
+  @override
+  Future<Result<List<String>>> getEmailHistory() async {
+    try {
+      final history = await _storage.getStringList(StorageKeys.emailHistory);
+      return Result.success(history ?? []);
+    } catch (e) {
+      return Result.failure(Failure.cache(message: 'Failed to get email history: $e'));
+    }
+  }
+
+  @override
+  Future<Result<void>> saveEmailToHistory(String email) async {
+    try {
+      final history = (await _storage.getStringList(StorageKeys.emailHistory)) ?? [];
+      if (!history.contains(email)) {
+        history.insert(0, email);
+        // Keep only top 10
+        if (history.length > 10) {
+          history.removeRange(10, history.length);
+        }
+        await _storage.setStringList(StorageKeys.emailHistory, history);
+      } else {
+        // Move to top if already exists
+        history.remove(email);
+        history.insert(0, email);
+        await _storage.setStringList(StorageKeys.emailHistory, history);
+      }
+      return const Result.success(null);
+    } catch (e) {
+      return Result.failure(Failure.cache(message: 'Failed to save email to history: $e'));
+    }
+  }
 }
