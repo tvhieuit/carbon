@@ -20,30 +20,33 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
         buildWhen: (previous, current) => previous.themeMode != current.themeMode || previous.locale != current.locale,
         builder: (context, state) {
-          return MaterialApp.router(
-            onGenerateTitle: (context) => AppLocalizations.of(context).appName,
-            scaffoldMessengerKey: GetIt.instance(),
-            debugShowCheckedModeBanner: false,
-            locale: state.locale,
-            localizationsDelegates: const {
-              ...AppLocalizations.localizationsDelegates,
-              AuthLocalizationsFallback.delegate,
-              AppSettingsLocalizations.delegate,
-            },
-            supportedLocales: AppLocalizations.supportedLocales,
-            theme: ThemeData(
-              useMaterial3: true,
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-            ),
-            darkTheme: ThemeData(
-              useMaterial3: true,
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.blue,
-                brightness: Brightness.dark,
+          return GestureDetector( // todo review late,
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: MaterialApp.router(
+              onGenerateTitle: (context) => AppLocalizations.of(context).appName,
+              scaffoldMessengerKey: GetIt.instance(),
+              debugShowCheckedModeBanner: false,
+              locale: const Locale('ja'),
+              localizationsDelegates: const {
+                ...AppLocalizations.localizationsDelegates,
+                AuthLocalizationsFallback.delegate,
+                AppSettingsLocalizations.delegate,
+              },
+              supportedLocales: AppLocalizations.supportedLocales,
+              theme: ThemeData(
+                useMaterial3: true,
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
               ),
+              darkTheme: ThemeData(
+                useMaterial3: true,
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: Colors.blue,
+                  brightness: Brightness.dark,
+                ),
+              ),
+              themeMode: state.themeMode,
+              routerConfig: _appRouter.config(),
             ),
-            themeMode: state.themeMode,
-            routerConfig: _appRouter.config(),
           );
         },
       ),

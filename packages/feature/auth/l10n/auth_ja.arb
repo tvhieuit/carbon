@@ -1,0 +1,95 @@
+{
+  "@@locale": "ja",
+  "loginTitle": "配達スタッフログイン",
+  "@loginTitle": {
+    "description": "Title for login page"
+  },
+  "loginButton": "ログイン",
+  "@loginButton": {
+    "description": "Login button text"
+  },
+  "registerTitle": "登録",
+  "@registerTitle": {
+    "description": "Title for register page"
+  },
+  "registerButton": "登録",
+  "@registerButton": {
+    "description": "Register button text"
+  },
+  "emailLabel": "メールアドレス",
+  "@emailLabel": {
+    "description": "Email field label"
+  },
+  "emailHint": "メールアドレス",
+  "@emailHint": {
+    "description": "Email field hint"
+  },
+  "emailRequired": "メールアドレスを入力してください",
+  "@emailRequired": {
+    "description": "Email required validation message"
+  },
+  "passwordLabel": "パスワード",
+  "@passwordLabel": {
+    "description": "Password field label"
+  },
+  "passwordHint": "パスワードを入力してください",
+  "@passwordHint": {
+    "description": "Password field hint"
+  },
+  "passwordRequired": "パスワードを入力してください",
+  "@passwordRequired": {
+    "description": "Password required validation message"
+  },
+  "passwordHelper": "大文字、小文字、数字を含む少なくとも8文字",
+  "@passwordHelper": {
+    "description": "Password requirements helper text"
+  },
+  "confirmPasswordLabel": "パスワード再入力",
+  "@confirmPasswordLabel": {
+    "description": "Confirm password field label"
+  },
+  "confirmPasswordHint": "パスワードを再入力してください",
+  "@confirmPasswordHint": {
+    "description": "Confirm your password"
+  },
+  "confirmPasswordRequired": "パスワードを再入力してください",
+  "@confirmPasswordRequired": {
+    "description": "Confirm password required validation message"
+  },
+  "passwordsDoNotMatch": "パスワードが一致しません",
+  "@passwordsDoNotMatch": {
+    "description": "Passwords do not match"
+  },
+  "fullNameLabel": "お名前",
+  "@fullNameLabel": {
+    "description": "Full name field label"
+  },
+  "fullNameHint": "お名前を入力してください",
+  "@fullNameHint": {
+    "description": "Enter your full name"
+  },
+  "fullNameRequired": "お名前を入力してください",
+  "@fullNameRequired": {
+    "description": "Please enter your name"
+  },
+  "phoneLabel": "電話番号（任意）",
+  "@phoneLabel": {
+    "description": "Phone field label"
+  },
+  "phoneHint": "電話番号を入力してください",
+  "@phoneHint": {
+    "description": "Enter your phone number"
+  },
+  "forgotPassword": "パスワードを忘れた方はこちら",
+  "@forgotPassword": {
+    "description": "Forgot password link text"
+  },
+  "noAccount": "アカウントをお持ちでないですか？",
+  "@noAccount": {
+    "description": "Text asking if user doesn't have account"
+  },
+  "alreadyHaveAccount": "すでにアカウントをお持ちですか？",
+  "@alreadyHaveAccount": {
+    "description": "Text asking if user already has account"
+  }
+}

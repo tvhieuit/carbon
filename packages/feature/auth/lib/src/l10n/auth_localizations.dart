@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'auth_localizations_en.dart';
+import 'auth_localizations_ja.dart';
 
 // ignore_for_file: type=lint
 
@@ -89,7 +90,7 @@ abstract class AuthLocalizations {
   ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('ja')];
 
   /// Title for login page
   ///
@@ -239,7 +240,7 @@ class _AuthLocalizationsDelegate extends LocalizationsDelegate<AuthLocalizations
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'ja'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AuthLocalizationsDelegate old) => false;
@@ -250,6 +251,8 @@ AuthLocalizations lookupAuthLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'en':
       return AuthLocalizationsEn();
+    case 'ja':
+      return AuthLocalizationsJa();
   }
 
   throw FlutterError(
