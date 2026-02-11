@@ -33,7 +33,7 @@ class StaffRepositoryImpl implements IStaffRepository {
         },
       );
 
-      final List<dynamic> data = response.data['data'] ?? [];
+      final List<dynamic> data = response.data['founds'] ?? [];
       final orders = data.map((json) => OrderModel.fromJson(json).toEntity()).toList();
       return Result.success(orders);
     } on DioException catch (e) {
@@ -55,11 +55,11 @@ class StaffRepositoryImpl implements IStaffRepository {
         queryParameters: {
           'page': page,
           'page_size': pageSize,
-          if (tenantStoreId != null) 'tenant_store_id': tenantStoreId,
+          if (tenantStoreId != null) 'tenant_store_id__eq': tenantStoreId,
         },
       );
 
-      final List<dynamic> data = response.data['data'] ?? [];
+      final List<dynamic> data = response.data['founds'] ?? [];
       final staffs = data.map((json) => StaffModel.fromJson(json).toEntity()).toList();
       return Result.success(staffs);
     } on DioException catch (e) {
@@ -84,7 +84,7 @@ class StaffRepositoryImpl implements IStaffRepository {
         },
       );
 
-      final List<dynamic> data = response.data['data'] ?? [];
+      final List<dynamic> data = response.data['founds'] ?? [];
       final stores = data.map((json) => StaffModel.fromJson(json).toEntity()).toList();
       return Result.success(stores);
     } on DioException catch (e) {
