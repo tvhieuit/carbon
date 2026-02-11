@@ -1,6 +1,7 @@
 import 'package:app_core/app_core.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Data layer dependency injection module.
@@ -30,7 +31,15 @@ abstract class DataModule {
     );
     dio.interceptors.addAll([
       authInterceptor,
-      LogInterceptor(responseBody: true, requestBody: true),
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+        maxWidth: 150,
+      ),
     ]);
     return dio;
   }
@@ -39,7 +48,7 @@ abstract class DataModule {
   @authDioNamed
   @lazySingleton
   Dio authDio(@apiUrlNamed String apiUrl) {
-    return Dio(
+    final dio = Dio(
       BaseOptions(
         baseUrl: apiUrl,
         connectTimeout: const Duration(seconds: 30),
@@ -51,5 +60,17 @@ abstract class DataModule {
         },
       ),
     );
+    dio.interceptors.add(
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+        maxWidth: 150,
+      ),
+    );
+    return dio;
   }
 }

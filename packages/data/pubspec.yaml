@@ -19,6 +19,7 @@ dependencies:
 
   # Networking
   dio: any
+  pretty_dio_logger: any
 
   # Local Storage
   shared_preferences: any
