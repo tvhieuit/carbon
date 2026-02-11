@@ -1,0 +1,13 @@
+{
+  "@@locale": "ja",
+  "settingsTitle": "設定",
+  "themeTitle": "テーマ",
+  "themeSystem": "システム",
+  "themeLight": "ライト",
+  "themeDark": "ダーク",
+  "languageTitle": "言語",
+  "languageSystem": "システム",
+  "languageEnglish": "英語",
+  "languageKorean": "韓国語",
+  "languageJapanese": "日本語"
+}

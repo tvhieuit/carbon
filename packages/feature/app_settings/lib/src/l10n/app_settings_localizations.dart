@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_settings_localizations_en.dart';
+import 'app_settings_localizations_ja.dart';
 import 'app_settings_localizations_ko.dart';
 
 // ignore_for_file: type=lint
@@ -90,7 +91,7 @@ abstract class AppSettingsLocalizations {
   ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('ko')];
+  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('ja'), Locale('ko')];
 
   /// No description provided for @settingsTitle.
   ///
@@ -145,6 +146,12 @@ abstract class AppSettingsLocalizations {
   /// In en, this message translates to:
   /// **'Korean'**
   String get languageKorean;
+
+  /// No description provided for @languageJapanese.
+  ///
+  /// In en, this message translates to:
+  /// **'Japanese'**
+  String get languageJapanese;
 }
 
 class _AppSettingsLocalizationsDelegate extends LocalizationsDelegate<AppSettingsLocalizations> {
@@ -156,7 +163,7 @@ class _AppSettingsLocalizationsDelegate extends LocalizationsDelegate<AppSetting
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'ko'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'ja', 'ko'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppSettingsLocalizationsDelegate old) => false;
@@ -167,6 +174,8 @@ AppSettingsLocalizations lookupAppSettingsLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'en':
       return AppSettingsLocalizationsEn();
+    case 'ja':
+      return AppSettingsLocalizationsJa();
     case 'ko':
       return AppSettingsLocalizationsKo();
   }

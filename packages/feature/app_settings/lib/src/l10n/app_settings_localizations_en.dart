@@ -34,4 +34,7 @@ class AppSettingsLocalizationsEn extends AppSettingsLocalizations {
 
   @override
   String get languageKorean => 'Korean';
+
+  @override
+  String get languageJapanese => 'Japanese';
 }
