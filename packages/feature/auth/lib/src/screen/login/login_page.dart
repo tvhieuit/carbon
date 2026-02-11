@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:feature_auth/assets/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -49,7 +50,6 @@ class _LoginViewState extends State<_LoginView> {
     final l10n = context.authL10n;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.loginTitle)),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -59,7 +59,10 @@ class _LoginViewState extends State<_LoginView> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Logo or Title
-                const Icon(Icons.lock_outline, size: 80, color: Colors.blue),
+                AuthAsset.image.splash.svg(
+                  width: 100,
+                  height: 100,
+                ),
                 const SizedBox(height: 32),
 
                 // Email field

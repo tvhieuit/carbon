@@ -27,6 +27,8 @@ class $AssetsImageGen {
 class AuthAsset {
   const AuthAsset._();
 
+  static const String package = 'feature_auth';
+
   static const $AssetsImageGen image = $AssetsImageGen();
 }
 
@@ -40,11 +42,13 @@ class SvgGenImage {
   final Set<String> flavors;
   final bool _isVecFormat;
 
+  static const String package = 'feature_auth';
+
   _svg.SvgPicture svg({
     Key? key,
     bool matchTextDirection = false,
     AssetBundle? bundle,
-    String? package,
+    @Deprecated('Do not specify package for a generated library asset') String? package = package,
     double? width,
     double? height,
     BoxFit fit = BoxFit.contain,
@@ -87,5 +91,5 @@ class SvgGenImage {
 
   String get path => _assetName;
 
-  String get keyName => _assetName;
+  String get keyName => 'packages/feature_auth/$_assetName';
 }
