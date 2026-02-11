@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
               onGenerateTitle: (context) => AppLocalizations.of(context).appName,
               scaffoldMessengerKey: GetIt.instance(),
               debugShowCheckedModeBanner: false,
-              locale: const Locale('ja'),
+              locale: state.locale,
               localizationsDelegates: const {
                 ...AppLocalizations.localizationsDelegates,
                 AuthLocalizationsFallback.delegate,

@@ -37,13 +37,14 @@ class AppSettingsBloc extends Bloc<AppSettingsEvent, AppSettingsState> {
     final themeModeResult = await _getThemeModeUseCase();
     final themeMode = themeModeResult.dataOrNull;
 
-    final localeResult = await _getLocaleUseCase();
-    final locale = localeResult.dataOrNull;
+    //todo default ja locale
+    // final localeResult = await _getLocaleUseCase();
+    // final locale = localeResult.dataOrNull;
 
     emit(
       state.copyWith(
         themeMode: themeMode ?? ThemeMode.system,
-        locale: locale,
+        locale: const Locale('ja'),
       ),
     );
   }
