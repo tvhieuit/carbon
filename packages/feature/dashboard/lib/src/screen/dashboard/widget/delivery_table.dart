@@ -14,7 +14,7 @@ class DeliveryTable extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: const Color(0xFFCECECE)),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -23,7 +23,7 @@ class DeliveryTable extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               itemCount: timeSlots.length,
-              separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey.shade300),
+              separatorBuilder: (context, index) => const Divider(height: 1, color: Color(0xFFCECECE)),
               itemBuilder: (context, index) {
                 final time = timeSlots[index];
                 final slotOrders = groupedOrders[time] ?? [];
@@ -70,7 +70,7 @@ class DeliveryTable extends StatelessWidget {
       return IntrinsicHeight(
         child: Row(
           children: [
-            _buildCell(time, flex: 1, center: true, textStyle: const TextStyle(fontSize: 12)),
+            _buildCell(time, flex: 1, center: true, textStyle: const TextStyle(fontSize: 12, color: Colors.black)),
             const VerticalDivider(width: 1),
             _buildCell('', flex: 3),
             const VerticalDivider(width: 1),
@@ -94,13 +94,14 @@ class DeliveryTable extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildCell(time, flex: 1, center: true, textStyle: const TextStyle(fontSize: 12)),
+                _buildCell(time, flex: 1, center: true, textStyle: const TextStyle(fontSize: 12, color: Colors.black)),
                 const VerticalDivider(width: 1),
                 _buildCell(
                   order.constructionSiteName,
                   flex: 3,
                   showRequiredSign: showRequiredSign,
                   companyName: order.companyName,
+                  textStyle: const TextStyle(fontSize: 13, color: Color(0xFF1E293B)),
                 ),
                 const VerticalDivider(width: 1),
                 _buildProductColumn(orderLines, flex: 3),
@@ -114,15 +115,15 @@ class DeliveryTable extends StatelessWidget {
 
   Color? _getBgColor(OrderEntity order) {
     if (order.deliveryStatus == 'キャンセル') {
-      return Colors.grey.shade200;
+      return Colors.grey.shade300;
     }
     if (order.receiptFileId != null || order.deliveryStatus == '納品済') {
-      return const Color(0xFFE8F5E9);
+      return Colors.green.shade50;
     }
     try {
       final now = DateTime.now();
       final toTimeParts = order.refuelingToTime.split(':');
-      if (toTimeParts.length == 2) {
+      if (toTimeParts.length >= 2) {
         final toTime = DateTime(
           now.year,
           now.month,
@@ -131,7 +132,7 @@ class DeliveryTable extends StatelessWidget {
           int.parse(toTimeParts[1]),
         );
         if (now.isAfter(toTime)) {
-          return const Color(0xFFFFF3E0);
+          return Colors.orange.shade100;
         }
       }
     } catch (_) {}
@@ -161,13 +162,17 @@ class DeliveryTable extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      _buildCell(line.productName ?? '', flex: 2),
+                      _buildCell(
+                        line.productName ?? '-',
+                        flex: 2,
+                        textStyle: const TextStyle(fontSize: 13, color: Color(0xFF475569)),
+                      ),
                       const VerticalDivider(width: 1),
                       _buildCell(
-                        '${line.quantity?.toInt()}',
+                        line.quantity != null ? '${line.quantity!.toInt()}' : '現地確認',
                         flex: 1,
                         alignRight: true,
-                        textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                        textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.black),
                       ),
                     ],
                   ),
@@ -201,14 +206,14 @@ class DeliveryTable extends StatelessWidget {
               if (companyName != null) ...[
                 TextSpan(
                   text: '$companyName\n',
-                  style: const TextStyle(fontSize: 11, color: Colors.grey),
+                  style: const TextStyle(fontSize: 11, color: Colors.black),
                 ),
               ],
               TextSpan(text: text),
               if (showRequiredSign)
                 const TextSpan(
-                  text: '(要サイン)',
-                  style: TextStyle(color: Colors.red, fontSize: 11),
+                  text: ' (要サイン)',
+                  style: TextStyle(color: Colors.red, fontSize: 13),
                 ),
             ],
           ),

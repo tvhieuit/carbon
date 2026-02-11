@@ -22,7 +22,6 @@ class DashboardPage extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F6FA), // Light grey background like design
       body: SafeArea(
         child: Column(
           children: [
@@ -98,23 +97,28 @@ class _StoreFilter extends StatelessWidget {
         return DropdownButtonFormField<String>(
           value: state.selectedStoreId,
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            constraints: const BoxConstraints(maxHeight: 36),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.shade300),
+              borderRadius: BorderRadius.circular(4),
+              borderSide: BorderSide(color: Colors.grey.shade400),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.shade300),
+              borderRadius: BorderRadius.circular(4),
+              borderSide: BorderSide(color: Colors.grey.shade400),
             ),
             filled: true,
-            fillColor: Colors.white,
+            fillColor: Colors.grey.shade200,
           ),
-          hint: const Text('Select Store'),
+          hint: const Text(''),
           items: state.stores.map((store) {
             return DropdownMenuItem<String>(
               value: store.id,
-              child: Text(store.name),
+              child: Text(
+                store.name,
+                style: const TextStyle(fontSize: 14),
+                overflow: TextOverflow.ellipsis,
+              ),
             );
           }).toList(),
           onChanged: (value) {
@@ -134,31 +138,49 @@ class _StaffFilter extends StatelessWidget {
     return BlocBuilder<DashboardBloc, DashboardState>(
       buildWhen: (prev, curr) => prev.staffs != curr.staffs || prev.selectedStaffId != curr.selectedStaffId,
       builder: (context, state) {
-        if (state.staffs.isEmpty) {
-          return const SizedBox.shrink();
-        }
         return DropdownButtonFormField<String>(
           value: state.selectedStaffId,
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            constraints: const BoxConstraints(maxHeight: 36),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.shade300),
+              borderRadius: BorderRadius.circular(4),
+              borderSide: BorderSide(color: Colors.grey.shade400),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.shade300),
+              borderRadius: BorderRadius.circular(4),
+              borderSide: BorderSide(color: Colors.grey.shade400),
             ),
             filled: true,
-            fillColor: Colors.white,
+            fillColor: Colors.grey.shade200,
           ),
-          hint: const Text('Select Staff'),
-          items: state.staffs.map((staff) {
-            return DropdownMenuItem<String>(
-              value: staff.id,
-              child: Text(staff.name),
-            );
-          }).toList(),
+          hint: const Text(''),
+          items: state.staffs.isEmpty
+              ? [
+                  DropdownMenuItem<String>(
+                    value: null,
+                    enabled: false,
+                    child: Center(
+                      child: Text(
+                        'No Data',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey.shade600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ]
+              : state.staffs.map((staff) {
+                  return DropdownMenuItem<String>(
+                    value: staff.id,
+                    child: Text(
+                      staff.name,
+                      style: const TextStyle(fontSize: 14),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  );
+                }).toList(),
           onChanged: (value) {
             if (value != null) {
               context.read<DashboardBloc>().add(DashboardEvent.selectStaff(value));
@@ -178,13 +200,6 @@ class _OrderList extends StatelessWidget {
     return BlocBuilder<DashboardBloc, DashboardState>(
       buildWhen: (prev, curr) => prev.orders != curr.orders || prev.isLoading != curr.isLoading,
       builder: (context, state) {
-        if (state.isLoading) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (state.orders.isEmpty) {
-          return const Center(child: Text('No orders found'));
-        }
-
         return Padding(
           padding: const EdgeInsets.all(16.0),
           child: DeliveryTable(orders: state.orders),
