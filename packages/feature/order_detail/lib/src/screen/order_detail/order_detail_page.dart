@@ -1,10 +1,10 @@
-import 'package:app_core/app_core.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import '../../l10n/l10n.dart';
+import '../../l10n/order_detail_localizations.dart';
 import 'order_detail_bloc.dart';
 
 @RoutePage()
@@ -95,7 +95,7 @@ class _OrderDetailContent extends StatelessWidget {
     );
   }
 
-  Widget _buildDeliveryHeader(var l10n) {
+  Widget _buildDeliveryHeader(OrderDetailLocalizations l10n) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
@@ -119,7 +119,7 @@ class _OrderDetailContent extends StatelessWidget {
     );
   }
 
-  Widget _buildDeliveryInfoCard(var l10n) {
+  Widget _buildDeliveryInfoCard(OrderDetailLocalizations l10n) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.all(16),
@@ -163,7 +163,7 @@ class _OrderDetailContent extends StatelessWidget {
     );
   }
 
-  Widget _buildProductSection(var l10n) {
+  Widget _buildProductSection(OrderDetailLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -233,7 +233,7 @@ class _OrderDetailContent extends StatelessWidget {
     );
   }
 
-  Widget _buildLocationSection(var l10n) {
+  Widget _buildLocationSection(OrderDetailLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -273,7 +273,7 @@ class _OrderDetailContent extends StatelessWidget {
     );
   }
 
-  Widget _buildNotesSection(var l10n) {
+  Widget _buildNotesSection(OrderDetailLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

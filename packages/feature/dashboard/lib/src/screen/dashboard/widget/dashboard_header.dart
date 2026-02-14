@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../dashboard_bloc.dart';
 import 'package:feature_dashboard/src/l10n/l10n.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 class DashboardHeader extends StatelessWidget {
