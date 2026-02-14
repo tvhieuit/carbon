@@ -6,14 +6,19 @@ import 'qr_scan_bloc.dart';
 import '../../l10n/l10n.dart';
 
 @RoutePage()
-class QrScanPage extends StatelessWidget {
+class QrScanPage extends StatelessWidget implements AutoRouteWrapper {
   const QrScanPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return const _QrScanView();
+  }
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
       create: (context) => QrScanBloc()..add(const QrScanEvent.started()),
-      child: const _QrScanView(),
+      child: this,
     );
   }
 }

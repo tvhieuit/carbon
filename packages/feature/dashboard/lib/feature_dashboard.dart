@@ -2,6 +2,7 @@ library feature_dashboard;
 
 export 'src/screen/dashboard/dashboard_page.dart';
 export 'src/screen/dashboard/dashboard_bloc.dart';
+export 'src/l10n/dashboard_localizations.dart';
 
 export 'src/di/di.dart';
 

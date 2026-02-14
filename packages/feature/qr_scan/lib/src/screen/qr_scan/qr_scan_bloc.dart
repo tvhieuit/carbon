@@ -15,7 +15,10 @@ class QrScanBloc extends Bloc<QrScanEvent, QrScanState> {
     });
 
     on<_QrCodeDetected>((event, emit) async {
-      final code = event.barcode.rawValue;
+      final barcodes = event.barcodes;
+      if (barcodes.isEmpty) return;
+
+      final code = barcodes.first.rawValue;
       if (code == null) return;
 
       emit(QrScanState.detected(code));
