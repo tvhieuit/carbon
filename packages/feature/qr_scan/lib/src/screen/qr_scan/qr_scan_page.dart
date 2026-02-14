@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'qr_scan_bloc.dart';
 import '../../l10n/l10n.dart';
@@ -17,7 +18,7 @@ class QrScanPage extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (context) => QrScanBloc()..add(const QrScanEvent.started()),
+      create: (context) => GetIt.instance<QrScanBloc>(),
       child: this,
     );
   }
@@ -100,7 +101,7 @@ class _QrScanViewState extends State<_QrScanView> {
               BlocBuilder<QrScanBloc, QrScanState>(
                 builder: (context, state) {
                   return state.maybeWhen(
-                    error: (error) => Padding(
+                    error: (message, errorCode) => Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -110,8 +111,13 @@ class _QrScanViewState extends State<_QrScanView> {
                             l10n.camera_error,
                             style: const TextStyle(color: Colors.red, fontSize: 16),
                           ),
+                          if (errorCode != null)
+                            Text(
+                              errorCode,
+                              style: const TextStyle(color: Colors.red, fontSize: 16),
+                            ),
                           Text(
-                            error.errorCode.toString(),
+                            message,
                             style: const TextStyle(color: Colors.red, fontSize: 16),
                           ),
                         ],
@@ -230,7 +236,7 @@ class _ScannerOverlay extends StatelessWidget {
 
     return Align(
       alignment: alignment,
-      child: Container(
+      child: SizedBox(
         width: length,
         height: length,
         child: CustomPaint(

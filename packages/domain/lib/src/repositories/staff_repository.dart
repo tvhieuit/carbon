@@ -22,4 +22,13 @@ abstract class IStaffRepository {
     required int pageSize,
     required String tenantId,
   });
+
+  Future<Result<List<OrderLineEntity>>> fetchDriverOrderLines({
+    required int page,
+    required int pageSize,
+    required String refuelingDate,
+    required String constructionSiteId,
+    required String shippingDriverId,
+    List<String>? orderStatus,
+  });
 }

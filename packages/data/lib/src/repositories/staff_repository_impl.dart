@@ -1,9 +1,10 @@
 import 'package:app_core/app_core.dart';
-import 'package:data/src/models/order/order_model.dart';
-import 'package:data/src/models/staff/staff_model.dart';
+import 'package:data/src/models/qr_info_model.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
+import '../models/order/order_model.dart';
+import '../models/staff/staff_model.dart';
 
 @Injectable(as: IStaffRepository)
 class StaffRepositoryImpl implements IStaffRepository {
@@ -87,6 +88,38 @@ class StaffRepositoryImpl implements IStaffRepository {
       final List<dynamic> data = response.data['founds'] ?? [];
       final stores = data.map((json) => StaffModel.fromJson(json).toEntity()).toList();
       return Result.success(stores);
+    } on DioException catch (e) {
+      return Result.failure(Failure.network(message: e.message ?? 'Network error'));
+    } catch (e) {
+      return Result.failure(Failure.unknown(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<List<OrderLineEntity>>> fetchDriverOrderLines({
+    required int page,
+    required int pageSize,
+    required String refuelingDate,
+    required String constructionSiteId,
+    required String shippingDriverId,
+    List<String>? orderStatus,
+  }) async {
+    try {
+      final response = await _dio.get(
+        '/driver/order-lines',
+        queryParameters: {
+          'page': page,
+          'page_size': pageSize,
+          'refueling_date': refuelingDate,
+          'construction_site_id': constructionSiteId,
+          'shipping_driver_id': shippingDriverId,
+          if (orderStatus != null) 'order_status': orderStatus,
+        },
+      );
+
+      final List<dynamic> data = response.data['founds'] ?? [];
+      final orderLines = data.map((json) => OrderLineModel.fromJson(json).toEntity()).toList();
+      return Result.success(orderLines);
     } on DioException catch (e) {
       return Result.failure(Failure.network(message: e.message ?? 'Network error'));
     } catch (e) {

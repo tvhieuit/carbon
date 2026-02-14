@@ -4,6 +4,7 @@ import 'package:data/data.dart';
 import 'package:feature_app_settings/app_settings.dart';
 import 'package:feature_auth/auth.dart';
 import 'package:feature_dashboard/feature_dashboard.dart';
+import 'package:feature_qr_scan/feature_qr_scan.dart';
 import 'package:use_cases/use_cases.dart';
 
 import 'package:get_it/get_it.dart';
@@ -41,6 +42,9 @@ void configureDependencies() {
 
   // Initialize app settings package dependencies
   initAppSettingsPackage();
+
+  // Initialize app qr scan package dependencies
+  initQrScanPackage();
 
   // Initialize main app dependencies
   getIt.init();
