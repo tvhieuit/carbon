@@ -13,12 +13,27 @@ import '../app/qr_scan_routes.dart';
 @module
 abstract class RouteModule {
   @lazySingleton
-  AppRoute get appRoute => const AppRoute(
-    login: LoginRoute(),
-    register: RegisterRoute(),
-    home: UserRoute(),
-    dashboard: DashboardRoute(),
-    qrScan: QrScanRoute(),
+  AppRoute get appRoute => AppRoute(
+    login: const LoginRoute(),
+    register: const RegisterRoute(),
+    home: const UserRoute(),
+    dashboard: const DashboardRoute(),
+    qrScan: const QrScanRoute(),
+    qrScanQuantity: QrScanQuantityRoute(
+      qrInfo: const QrInfoEntity(
+        id: '',
+        machineName: '',
+        machineNumber: '',
+        constructionSiteId: '',
+        constructionSiteName: '',
+        companyId: '',
+        companyName: '',
+        productName: '',
+        branchId: '',
+        branchName: '',
+      ),
+      orderLines: [],
+    ),
   );
 
   @lazySingleton

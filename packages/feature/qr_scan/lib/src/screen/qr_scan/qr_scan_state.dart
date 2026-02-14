@@ -6,5 +6,8 @@ class QrScanState with _$QrScanState {
   const factory QrScanState.scanning() = _Scanning;
   const factory QrScanState.detected(String code) = _Detected;
   const factory QrScanState.error(String message, {String? errorCode}) = _Error;
-  const factory QrScanState.success() = _Success;
+  const factory QrScanState.success({
+    required QrInfoEntity qrInfo,
+    required List<OrderLineEntity> orderLines,
+  }) = _Success;
 }

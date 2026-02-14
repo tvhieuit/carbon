@@ -39,6 +39,7 @@ dependencies:
   app_widget: any
   app_utility: any
   app_core: any
+  feature_auth: any
 
 dev_dependencies:
   flutter_test:

@@ -2,8 +2,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:domain/domain.dart';
 import 'package:use_cases/use_cases.dart';
 import 'package:intl/intl.dart';
+import 'package:auto_route/auto_route.dart';
 
 part 'qr_scan_event.dart';
 part 'qr_scan_state.dart';
@@ -14,11 +16,13 @@ class QrScanBloc extends Bloc<QrScanEvent, QrScanState> {
   final FetchQrInfoUseCase _fetchQrInfoUseCase;
   final FetchDriverOrderLinesUseCase _fetchDriverOrderLinesUseCase;
   final GetMeUseCase _getMeUseCase;
+  final StackRouter _router;
 
   QrScanBloc(
     this._fetchQrInfoUseCase,
     this._fetchDriverOrderLinesUseCase,
     this._getMeUseCase,
+    this._router,
   ) : super(const QrScanState.scanning()) {
     on<_QrCodeDetected>(_onQrCodeDetected);
     on<_ErrorOccurred>(_onErrorOccurred);
@@ -87,9 +91,15 @@ class QrScanBloc extends Bloc<QrScanEvent, QrScanState> {
       return;
     }
 
-    // TODO: Navigate to delivery screen or show success state with order lines
-    // For now, we stay in detected state but could emit success
-    // emit(QrScanState.success(qrInfo, orderLinesResult.data!));
+    // 4. Emit Success
+    emit(
+      QrScanState.success(
+        qrInfo: qrInfo,
+        orderLines: orderLinesResult.data!,
+      ),
+    );
+
+    _router.pushPath('/qr-scan-quantity');
   }
 
   void _onErrorOccurred(_ErrorOccurred event, Emitter<QrScanState> emit) {
