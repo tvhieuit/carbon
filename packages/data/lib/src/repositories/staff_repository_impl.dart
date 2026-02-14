@@ -103,6 +103,8 @@ class StaffRepositoryImpl implements IStaffRepository {
     required String constructionSiteId,
     required String shippingDriverId,
     List<String>? orderStatus,
+    List<String>? sortColumns,
+    List<String>? sortOrders,
   }) async {
     try {
       final response = await _dio.get(
@@ -114,6 +116,8 @@ class StaffRepositoryImpl implements IStaffRepository {
           'construction_site_id': constructionSiteId,
           'shipping_driver_id': shippingDriverId,
           if (orderStatus != null) 'order_status': orderStatus,
+          if (sortColumns != null) 'sort_columns': sortColumns,
+          if (sortOrders != null) 'sort_orders': sortOrders,
         },
       );
 

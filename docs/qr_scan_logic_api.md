@@ -47,17 +47,27 @@ Khi người dùng thực hiện quét mã QR, sự kiện `FetchOrderLinesReque
 }
 ```
 
-### 2. Lấy danh sách Đơn hàng theo máy
+### 2. Lấy danh sách Đơn hàng theo máy (`fetchDriverOrderLines`)
 - **Endpoint**: `GET /driver/order-lines`
-- **Controller**: `StaffController.fetchDriverOrderLines`
-- **Tham số Query**:
-    - `construction_site_id`: ID hiện trường.
-    - `shipping_driver_id`: ID tài xế.
-    - `refueling_date`: Ngày cấp dầu (`yyyy-MM-dd`).
-    - `order_status[]`: Danh sách trạng thái (thường là `['NEW']`).
-    - `page` & `page_size`: Phân trang.
+- **Controller Method**: `StaffController.fetchDriverOrderLines`
+- **Mô tả**: Lấy danh sách các dòng đơn hàng rỗng (chưa cấp phát) của một tài xế tại một hiện trường cụ thể trong một ngày nhất định.
 
-**Response Model (`DriverOrderLine`)**:
+#### Tham số Query (Query Parameters)
+| Tham số | Kiểu dữ liệu | Bắt buộc | Mặc định | Mô tả |
+| :--- | :--- | :---: | :--- | :--- |
+| `construction_site_id` | `String` | **Có** | - | ID của hiện trường xây dựng. |
+| `shipping_driver_id` | `String` | **Có** | - | ID của tài xế thực hiện. |
+| `refueling_date` | `String` | Không | - | Ngày cấp dầu (định dạng `yyyy-MM-dd`). |
+| `order_status[]` | `List<String>` | Không | - | Lọc theo trạng thái đơn hàng (ví dụ: `NEW`). |
+| `page` | `int` | Không | `1` | Số trang cần lấy. |
+| `page_size` | `int` | Không | `10` | Số lượng mục trên mỗi trang. |
+| `sort_columns[]` | `List<String>` | Không | - | Danh sách các cột cần sắp xếp. |
+| `sort_orders[]` | `List<String>` | Không | - | Thứ tự sắp xếp tương ứng (`ASC`/`DESC`). |
+
+#### Cấu trúc dữ liệu Response
+**Response Object**: `BasePagingResponse<DriverOrderLine>`
+
+**DriverOrderLine Model**:
 ```json
 {
   "id": "string",

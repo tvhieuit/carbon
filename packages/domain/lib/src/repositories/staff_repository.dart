@@ -30,5 +30,7 @@ abstract class IStaffRepository {
     required String constructionSiteId,
     required String shippingDriverId,
     List<String>? orderStatus,
+    List<String>? sortColumns,
+    List<String>? sortOrders,
   });
 }

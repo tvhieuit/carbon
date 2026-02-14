@@ -15,6 +15,8 @@ sealed class FetchDriverOrderLinesParams with _$FetchDriverOrderLinesParams {
     required String constructionSiteId,
     required String shippingDriverId,
     List<String>? orderStatus,
+    List<String>? sortColumns,
+    List<String>? sortOrders,
   }) = _FetchDriverOrderLinesParams;
 }
 
@@ -33,6 +35,8 @@ class FetchDriverOrderLinesUseCase implements UseCaseWithParams<List<OrderLineEn
       constructionSiteId: params.constructionSiteId,
       shippingDriverId: params.shippingDriverId,
       orderStatus: params.orderStatus,
+      sortColumns: params.sortColumns,
+      sortOrders: params.sortOrders,
     );
   }
 }
