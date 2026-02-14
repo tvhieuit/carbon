@@ -6,6 +6,7 @@ import 'package:feature_auth/auth.dart';
 import 'package:feature_dashboard/feature_dashboard.dart';
 import 'package:feature_qr_scan/feature_qr_scan.dart';
 import 'package:feature_order_detail/feature_order_detail.dart';
+import 'package:feature_delivery_creation/feature_delivery_creation.dart';
 import 'package:use_cases/use_cases.dart';
 
 import 'package:get_it/get_it.dart';
@@ -49,6 +50,9 @@ void configureDependencies() {
 
   // Initialize order detail package dependencies
   initOrderDetailPackage();
+
+  // Initialize delivery creation package dependencies
+  initDeliveryCreationPackage();
 
   // Initialize main app dependencies
   getIt.init();

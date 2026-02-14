@@ -1,5 +1,7 @@
 export 'user_entity.dart';
 export 'product_entity.dart';
+export 'delivery_order_entity.dart';
+export 'machinery_item_entity.dart';
 export 'order_entity.dart';
 export 'staff_entity.dart';
 export 'qr_info_entity.dart';

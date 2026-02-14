@@ -7,6 +7,7 @@ import 'app_router.gr.dart';
 import 'auth_routes.dart';
 import 'settings_routes.dart';
 import 'dashboard_routes.dart';
+import 'delivery_creation_routes.dart';
 
 @singleton
 @AutoRouterConfig(replaceInRouteName: 'Page,Route')
@@ -34,6 +35,7 @@ class AppRouter extends RootStackRouter {
     // QR Scan screen
     AutoRoute(page: QrScanRoute.page, path: '/qr-scan'),
     AutoRoute(page: QrScanQuantityRoute.page, path: '/qr-scan-quantity'),
+    AutoRoute(page: DeliveryCreationQrCodeRoute.page, path: '/delivery-creation/:orderId/:orderLineId'),
 
     // App Settings (Bottom Sheet)
     AppBottomSheetRoute(page: AppSettingsRoute.page),

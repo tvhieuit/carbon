@@ -1,0 +1,25 @@
+{
+  "@@locale": "ja",
+  "delivery_creation_title": "納品作成",
+  "@delivery_creation_title": {
+    "description": "納品作成画面のタイトル"
+  },
+  "loading_processing": "納品処理中...",
+  "customer_name_label": "顧客名",
+  "construction_site_name_label": "現場名",
+  "person_in_charge_label": "現場担当者",
+  "contact_phone_label": "連絡先",
+  "machinery_table_image": "画像",
+  "machinery_table_name": "名称",
+  "machinery_table_number": "車台番号",
+  "machinery_table_quantity": "数量",
+  "add_machinery_button": "機械追加",
+  "submit_button": "登録",
+  "add_machinery_dialog_title": "機械を追加する",
+  "from_master_label": "マスターから選択",
+  "new_registration_label": "新規登録",
+  "select_machine_hint": "機械を選択してください",
+  "machine_name_input_label": "名称入力",
+  "vehicle_number_input_label": "車台番号入力",
+  "quantity_input_label": "数量入力"
+}

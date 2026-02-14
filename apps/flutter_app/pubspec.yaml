@@ -53,6 +53,7 @@ dependencies:
   feature_qr_scan: any
   feature_order_detail: any
   feature_app_settings: any
+  feature_delivery_creation: any
   fluttertoast: any
 
 dev_dependencies:

@@ -19,6 +19,7 @@ workspace:
   - packages/feature/dashboard
   - packages/feature/qr_scan
   - packages/feature/order_detail
+  - packages/feature/delivery_creation
   - packages/app_core
 
 dev_dependencies:
@@ -57,6 +58,7 @@ melos:
           - "feature_app_settings"
           - "feature_qr_scan"
           - "feature_order_detail"
+          - "feature_delivery_creation"
 
     analyze:
       run: fvm dart run melos exec --concurrency=1 -- fvm flutter analyze
