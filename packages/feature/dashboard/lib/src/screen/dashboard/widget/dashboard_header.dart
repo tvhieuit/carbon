@@ -1,3 +1,5 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../dashboard_bloc.dart';
 import 'package:feature_dashboard/src/l10n/l10n.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,7 @@ class DashboardHeader extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.qr_code_scanner, size: 28),
             onPressed: () {
-              context.router.pushNamed('/qr-scan');
+              context.read<DashboardBloc>().add(const DashboardEvent.qrScanPressed());
             },
           ),
           const SizedBox(width: 8),

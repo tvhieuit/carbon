@@ -20,11 +20,13 @@ class AppRoute {
   final PageRouteInfo register;
   final PageRouteInfo home;
   final PageRouteInfo dashboard;
+  final PageRouteInfo qrScan;
 
   const AppRoute({
     required this.login,
     required this.register,
     required this.home,
     required this.dashboard,
+    required this.qrScan,
   });
 }

@@ -64,11 +64,9 @@ class _QrScanViewState extends State<_QrScanView> {
             controller: controller,
             onDetect: (capture) {
               final barcodes = capture.barcodes;
-              for (final barcode in barcodes) {
-                context.read<QrScanBloc>().add(QrScanEvent.qrCodeDetected(barcode));
-              }
+              context.read<QrScanBloc>().add(QrScanEvent.qrCodeDetected(barcodes));
             },
-            errorBuilder: (context, error, child) {
+            errorBuilder: (context, error) {
               context.read<QrScanBloc>().add(QrScanEvent.errorOccurred(error));
               return const SizedBox.shrink();
             },

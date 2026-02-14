@@ -3,3 +3,4 @@ template-arb-file: qr_scan_en.arb
 output-localization-file: qr_scan_localizations.dart
 nullable-getter: false
 output-dir: lib/src/l10n
+output-class: QrScanLocalizations

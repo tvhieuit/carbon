@@ -5,8 +5,8 @@ import 'qr_scan_localizations.dart';
 // ignore_for_file: type=lint
 
 /// The translations for Japanese (`ja`).
-class AppLocalizationsJa extends AppLocalizations {
-  AppLocalizationsJa([String locale = 'ja']) : super(locale);
+class QrScanLocalizationsJa extends QrScanLocalizations {
+  QrScanLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
   String get qr_scan_title => 'QRコード読み取り';

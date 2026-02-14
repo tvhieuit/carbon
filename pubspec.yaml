@@ -54,6 +54,7 @@ melos:
           - "flutter_app"
           - "feature_auth"
           - "feature_app_settings"
+          - "feature_qr_scan"
 
     analyze:
       run: fvm dart run melos exec --concurrency=1 -- fvm flutter analyze

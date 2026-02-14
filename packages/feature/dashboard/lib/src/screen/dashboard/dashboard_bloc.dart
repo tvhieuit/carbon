@@ -29,6 +29,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     on<_SelectStore>(_onSelectStore);
     on<_SelectStaff>(_onSelectStaff);
     on<_NavigateToOrderDetail>(_onNavigateToOrderDetail);
+    on<_QrScanPressed>(_onQrScanPressed);
 
     add(const DashboardEvent.started());
   }
@@ -137,5 +138,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     // TODO: Implement Network check and Offline mode as per dashboard_business.md
     // For now, just navigate
     _router.push(_appRoute.dashboard); // Placeholder for detail
+  }
+
+  void _onQrScanPressed(_QrScanPressed event, emit) {
+    _router.push(_appRoute.qrScan);
   }
 }
