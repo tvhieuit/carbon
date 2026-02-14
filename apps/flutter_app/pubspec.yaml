@@ -51,6 +51,7 @@ dependencies:
   feature_auth: any
   feature_dashboard: any
   feature_qr_scan: any
+  feature_order_detail: any
   feature_app_settings: any
   fluttertoast: any
 

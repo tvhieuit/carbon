@@ -1,0 +1,5 @@
+arb-dir: l10n
+template-arb-file: order_detail_ja.arb
+output-localization-file: order_detail_localizations.dart
+output-class: OrderDetailLocalizations
+synthetic-package: false

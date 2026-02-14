@@ -14,6 +14,7 @@ sealed class OrderEntity with _$OrderEntity {
     @JsonKey(name: 'company_name') required String companyName,
     @JsonKey(name: 'construction_site_name') required String constructionSiteName,
     @JsonKey(name: 'delivery_status') required String deliveryStatus,
+    @JsonKey(name: 'shipping_driver_id') String? shippingDriverId,
     @JsonKey(name: 'receipt_file_id') String? receiptFileId,
     @JsonKey(name: 'signature_date') DateTime? signatureDate,
     @JsonKey(name: 'product_id') String? productId,

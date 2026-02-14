@@ -1,5 +1,4 @@
 import 'package:app_core/app_core.dart';
-import 'package:data/src/models/qr_info_model.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
@@ -124,6 +123,22 @@ class StaffRepositoryImpl implements IStaffRepository {
       final List<dynamic> data = response.data['founds'] ?? [];
       final orderLines = data.map((json) => OrderLineModel.fromJson(json).toEntity()).toList();
       return Result.success(orderLines);
+    } on DioException catch (e) {
+      return Result.failure(Failure.network(message: e.message ?? 'Network error'));
+    } catch (e) {
+      return Result.failure(Failure.unknown(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<OrderEntity>> getOrderDetail(String orderId) async {
+    try {
+      final response = await _dio.get(
+        '/driver/orders/$orderId/order-lines',
+      );
+
+      final data = response.data['data'];
+      return Result.success(OrderModel.fromJson(data).toEntity());
     } on DioException catch (e) {
       return Result.failure(Failure.network(message: e.message ?? 'Network error'));
     } catch (e) {

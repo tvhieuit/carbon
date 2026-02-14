@@ -33,4 +33,6 @@ abstract class IStaffRepository {
     List<String>? sortColumns,
     List<String>? sortOrders,
   });
+
+  Future<Result<OrderEntity>> getOrderDetail(String orderId);
 }
