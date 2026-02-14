@@ -3,5 +3,17 @@
   "qr_scan_title": "QRコード読み取り",
   "scan_your_qr": "Scan your QR Code",
   "close_button": "閉じる",
-  "camera_error": "Camera Error:"
+  "camera_error": "Camera Error:",
+  "machine_info_title": "機械情報",
+  "customer_name_label": "顧客名：",
+  "branch_name_label": "支店名：",
+  "construction_site_name_label": "現場名：",
+  "machine_name_label": "機械名：",
+  "machine_number_label": "車体番号：",
+  "fuel_type_label": "燃料：",
+  "product_name_header": "商品名",
+  "order_number_header": "受注番号",
+  "quantity_header": "数量",
+  "finish_button": "終了",
+  "next_scan_button": "次のスキャン"
 }

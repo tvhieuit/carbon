@@ -33,6 +33,7 @@ class AppRouter extends RootStackRouter {
 
     // QR Scan screen
     AutoRoute(page: QrScanRoute.page, path: '/qr-scan'),
+    AutoRoute(page: QrScanQuantityRoute.page, path: '/qr-scan-quantity'),
 
     // App Settings (Bottom Sheet)
     AppBottomSheetRoute(page: AppSettingsRoute.page),

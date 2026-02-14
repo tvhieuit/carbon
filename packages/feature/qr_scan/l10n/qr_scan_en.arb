@@ -3,5 +3,17 @@
   "qr_scan_title": "QR Scan",
   "scan_your_qr": "Scan your QR Code",
   "close_button": "Close",
-  "camera_error": "Camera Error:"
+  "camera_error": "Camera Error:",
+  "machine_info_title": "Machine Information",
+  "customer_name_label": "Customer Name:",
+  "branch_name_label": "Branch Name:",
+  "construction_site_name_label": "Construction Site:",
+  "machine_name_label": "Machine Name:",
+  "machine_number_label": "Machine Number:",
+  "fuel_type_label": "Fuel Type:",
+  "product_name_header": "Product Name",
+  "order_number_header": "Order Number",
+  "quantity_header": "Quantity",
+  "finish_button": "Finish",
+  "next_scan_button": "Next Scan"
 }

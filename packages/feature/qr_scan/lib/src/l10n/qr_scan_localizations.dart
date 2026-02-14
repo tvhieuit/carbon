@@ -116,6 +116,78 @@ abstract class QrScanLocalizations {
   /// In en, this message translates to:
   /// **'Camera Error:'**
   String get camera_error;
+
+  /// No description provided for @machine_info_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Machine Information'**
+  String get machine_info_title;
+
+  /// No description provided for @customer_name_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer Name:'**
+  String get customer_name_label;
+
+  /// No description provided for @branch_name_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Branch Name:'**
+  String get branch_name_label;
+
+  /// No description provided for @construction_site_name_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Construction Site:'**
+  String get construction_site_name_label;
+
+  /// No description provided for @machine_name_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Machine Name:'**
+  String get machine_name_label;
+
+  /// No description provided for @machine_number_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Machine Number:'**
+  String get machine_number_label;
+
+  /// No description provided for @fuel_type_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Fuel Type:'**
+  String get fuel_type_label;
+
+  /// No description provided for @product_name_header.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Name'**
+  String get product_name_header;
+
+  /// No description provided for @order_number_header.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Number'**
+  String get order_number_header;
+
+  /// No description provided for @quantity_header.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get quantity_header;
+
+  /// No description provided for @finish_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get finish_button;
+
+  /// No description provided for @next_scan_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Scan'**
+  String get next_scan_button;
 }
 
 class _QrScanLocalizationsDelegate extends LocalizationsDelegate<QrScanLocalizations> {

@@ -19,4 +19,40 @@ class QrScanLocalizationsJa extends QrScanLocalizations {
 
   @override
   String get camera_error => 'Camera Error:';
+
+  @override
+  String get machine_info_title => '機械情報';
+
+  @override
+  String get customer_name_label => '顧客名：';
+
+  @override
+  String get branch_name_label => '支店名：';
+
+  @override
+  String get construction_site_name_label => '現場名：';
+
+  @override
+  String get machine_name_label => '機械名：';
+
+  @override
+  String get machine_number_label => '車体番号：';
+
+  @override
+  String get fuel_type_label => '燃料：';
+
+  @override
+  String get product_name_header => '商品名';
+
+  @override
+  String get order_number_header => '受注番号';
+
+  @override
+  String get quantity_header => '数量';
+
+  @override
+  String get finish_button => '終了';
+
+  @override
+  String get next_scan_button => '次のスキャン';
 }
