@@ -1,6 +1,9 @@
 # Tài liệu Màn hình Quét mã QR (QrScan - Carbon v2)
 
-Tài liệu này mô tả logic nghiệp vụ và các API tích hợp cho tính năng quét mã QR để bắt đầu quy trình cấp nhiên liệu.
+Tài liệu này mô tả logic nghiệp vụ tổng quan cho tính năng quét mã QR. 
+
+> [!TIP]
+> Để xem chi tiết kỹ thuật về các API endpoints, tham số và luồng dữ liệu, vui lòng tham khảo [Tài liệu Logic và API QR Scan](file:///Users/admn/workspace/Carbon/docs/qr_scan_logic_api.md).
 
 ## 1. Tổng quan Nghiệp vụ (Business Logic)
 

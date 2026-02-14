@@ -1,4 +1,5 @@
 import 'package:feature_dashboard/src/l10n/l10n.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 class DashboardHeader extends StatelessWidget {
@@ -15,7 +16,7 @@ class DashboardHeader extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.qr_code_scanner, size: 28),
             onPressed: () {
-              // TODO: Implement scanner
+              context.router.pushNamed('/qr-scan');
             },
           ),
           const SizedBox(width: 8),

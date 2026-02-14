@@ -1,0 +1,56 @@
+name: feature_qr_scan
+description: QR Scan feature package for Carbon v2
+publish_to: 'none'
+version: 0.0.1
+
+resolution: workspace
+
+environment:
+  sdk: '>=3.9.0 <4.0.0'
+  flutter: '>=3.38.8 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  
+  # Domain layer
+  domain: any
+  use_cases: any
+  
+  # State Management
+  flutter_bloc: any
+
+  # Dependency Injection
+  get_it: any
+  injectable: any
+  
+  # Code Generation
+  freezed_annotation: any
+  json_annotation: any
+  
+  # Routing
+  auto_route: any
+
+  intl: any
+  mobile_scanner: any
+
+  app_widget: any
+  app_utility: any
+  app_core: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: any
+  
+  # Code Generation
+  build_runner: any
+  freezed: any
+  json_serializable: any
+  injectable_generator: any
+  auto_route_generator: any
+
+flutter:
+  generate: true

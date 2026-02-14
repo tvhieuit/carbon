@@ -1,0 +1,7 @@
+{
+  "@@locale": "ja",
+  "qr_scan_title": "QRコード読み取り",
+  "scan_your_qr": "Scan your QR Code",
+  "close_button": "閉じる",
+  "camera_error": "Camera Error:"
+}

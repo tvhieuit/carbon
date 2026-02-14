@@ -1,0 +1,7 @@
+{
+  "@@locale": "en",
+  "qr_scan_title": "QR Scan",
+  "scan_your_qr": "Scan your QR Code",
+  "close_button": "Close",
+  "camera_error": "Camera Error:"
+}

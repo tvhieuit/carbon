@@ -1,0 +1,7 @@
+{
+  "@@locale": "vi",
+  "qr_scan_title": "Quét mã QR",
+  "scan_your_qr": "Scan your QR Code",
+  "close_button": "Đóng",
+  "camera_error": "Camera Error:"
+}

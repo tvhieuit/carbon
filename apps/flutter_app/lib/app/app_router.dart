@@ -2,6 +2,7 @@ import 'package:app_core/app_core.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:feature_qr_scan/feature_qr_scan.dart';
 import 'app_router.gr.dart';
 import 'auth_routes.dart';
 import 'settings_routes.dart';
@@ -29,6 +30,9 @@ class AppRouter extends RootStackRouter {
 
     // Dashboard screen
     AutoRoute(page: DashboardRoute.page, path: '/dashboard'),
+
+    // QR Scan screen
+    AutoRoute(page: QrScanRoute.page, path: '/qr-scan'),
 
     // App Settings (Bottom Sheet)
     AppBottomSheetRoute(page: AppSettingsRoute.page),
