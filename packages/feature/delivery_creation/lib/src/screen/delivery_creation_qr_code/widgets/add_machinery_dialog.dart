@@ -1,4 +1,5 @@
 import 'package:domain/domain.dart';
+import 'package:feature_delivery_creation/feature_delivery_creation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:use_cases/use_cases.dart';
@@ -7,11 +8,13 @@ import '../../../l10n/l10n.dart';
 
 class AddMachineryDialog extends StatefulWidget {
   final String orderId;
+  final String? productName;
   final Function(MachineryItemEntity) onAdd;
 
   const AddMachineryDialog({
     super.key,
     required this.orderId,
+    this.productName,
     required this.onAdd,
   });
 
@@ -149,6 +152,7 @@ class _AddMachineryDialogState extends State<AddMachineryDialog> {
         quantity: quantity,
         images: m.images,
         productId: m.productId,
+        productName: m.productName ?? widget.productName,
       );
     } else {
       if (_nameController.text.isEmpty || _numberController.text.isEmpty) return;
@@ -157,6 +161,7 @@ class _AddMachineryDialogState extends State<AddMachineryDialog> {
         machineryName: _nameController.text,
         vehicleNumber: _numberController.text,
         quantity: quantity,
+        productName: widget.productName,
       );
     }
 

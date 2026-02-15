@@ -1,6 +1,6 @@
 part of 'delivery_creation_qr_code_bloc.dart';
 
-@freezed
+@eventFreezed
 class DeliveryCreationQrCodeEvent with _$DeliveryCreationQrCodeEvent {
   const factory DeliveryCreationQrCodeEvent.init({
     required String orderId,

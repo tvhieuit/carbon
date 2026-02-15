@@ -21,5 +21,6 @@
   "select_machine_hint": "機械を選択してください",
   "machine_name_input_label": "名称入力",
   "vehicle_number_input_label": "車台番号入力",
-  "quantity_input_label": "数量入力"
+  "quantity_input_label": "数量入力",
+  "product_name_label": "品名"
 }

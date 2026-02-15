@@ -13,6 +13,8 @@ sealed class MachineryItemEntity with _$MachineryItemEntity {
     double? quantity,
     @Default([]) List<String> images,
     String? productId,
+    String? productName,
+    String? manufacturer,
   }) = _MachineryItemEntity;
 
   factory MachineryItemEntity.fromJson(Map<String, dynamic> json) => _$MachineryItemEntityFromJson(json);

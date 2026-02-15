@@ -204,6 +204,12 @@ abstract class DeliveryCreationLocalizations {
   /// In ja, this message translates to:
   /// **'数量入力'**
   String get quantity_input_label;
+
+  /// No description provided for @product_name_label.
+  ///
+  /// In ja, this message translates to:
+  /// **'品名'**
+  String get product_name_label;
 }
 
 class _DeliveryCreationLocalizationsDelegate extends LocalizationsDelegate<DeliveryCreationLocalizations> {

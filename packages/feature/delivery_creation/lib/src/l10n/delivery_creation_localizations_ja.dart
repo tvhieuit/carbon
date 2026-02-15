@@ -64,4 +64,7 @@ class DeliveryCreationLocalizationsJa extends DeliveryCreationLocalizations {
 
   @override
   String get quantity_input_label => '数量入力';
+
+  @override
+  String get product_name_label => '品名';
 }
