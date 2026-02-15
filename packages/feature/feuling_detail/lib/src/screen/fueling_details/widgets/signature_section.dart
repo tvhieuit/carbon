@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 
+import '../../../l10n/l10n.dart';
 import 'signature_painter.dart';
 
 class SignatureSection extends StatelessWidget {
@@ -23,6 +24,7 @@ class SignatureSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.feulingDetailL10n;
     final hasSignatureUrl = signatureUrl != null;
     final hasLocalSignature =
         signaturePoints != null && signaturePoints!.isNotEmpty;
@@ -33,17 +35,17 @@ class SignatureSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            '受領サイン',
-            style: TextStyle(
+          Text(
+            l10n.signature_title,
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const Text(
-            '現場責任者からサインを取得してください',
-            style: TextStyle(
+          Text(
+            l10n.signature_instruction,
+            style: const TextStyle(
               color: Color(0xFF667085),
               fontSize: 14,
               fontWeight: FontWeight.w400,
@@ -72,10 +74,10 @@ class SignatureSection extends StatelessWidget {
                               child: CircularProgressIndicator());
                         },
                         errorBuilder: (context, error, stackTrace) {
-                          return const Center(
+                          return Center(
                             child: Text(
-                              '署名の読み込みに失敗しました',
-                              style: TextStyle(color: Colors.red),
+                              l10n.signature_load_error,
+                              style: const TextStyle(color: Colors.red),
                             ),
                           );
                         },
@@ -90,8 +92,8 @@ class SignatureSection extends StatelessWidget {
                         : Center(
                             child: Text(
                               isEnabled
-                                  ? 'タップしてサインを取得'
-                                  : 'サインは不要です',
+                                  ? l10n.signature_tap_to_sign
+                                  : l10n.signature_not_required,
                               style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 16,
@@ -107,11 +109,11 @@ class SignatureSection extends StatelessWidget {
   }
 }
 
-/// Shows the signature pad dialog and returns the signature file path if saved.
 Future<SignatureResult?> showSignaturePadDialog(
   BuildContext context, {
   required String orderId,
 }) async {
+  final l10n = context.feulingDetailL10n;
   final screenSize = MediaQuery.of(context).size;
   final dialogWidth = screenSize.width - 8;
   final dialogHeight = screenSize.height * 0.7;
@@ -152,9 +154,9 @@ Future<SignatureResult?> showSignaturePadDialog(
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        const Text(
-                          '受領サイン',
-                          style: TextStyle(
+                        Text(
+                          l10n.signature_title,
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -176,11 +178,11 @@ Future<SignatureResult?> showSignaturePadDialog(
                   ),
 
                   // Instruction
-                  const Padding(
-                    padding: EdgeInsets.all(16.0),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
                     child: Text(
-                      '現場責任者からサインを取得してください',
-                      style: TextStyle(
+                      l10n.signature_instruction,
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black87,
                       ),
@@ -253,9 +255,9 @@ Future<SignatureResult?> showSignaturePadDialog(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 12),
                             ),
-                            child: const Text(
-                              'キャンセル',
-                              style: TextStyle(
+                            child: Text(
+                              l10n.button_cancel,
+                              style: const TextStyle(
                                   color: Colors.blue, fontSize: 16),
                             ),
                           ),
@@ -267,15 +269,15 @@ Future<SignatureResult?> showSignaturePadDialog(
                               if (tempPoints.isEmpty) {
                                 ScaffoldMessenger.of(dialogContext)
                                     .showSnackBar(
-                                  const SnackBar(
-                                    content: Text('サインを入力してください'),
+                                  SnackBar(
+                                    content:
+                                        Text(l10n.signature_required_error),
                                     backgroundColor: Colors.red,
                                   ),
                                 );
                                 return;
                               }
 
-                              // Convert signature to image file
                               final filePath =
                                   await _saveSignatureToFile(
                                 tempPoints,
@@ -303,8 +305,8 @@ Future<SignatureResult?> showSignaturePadDialog(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 12),
                             ),
-                            child: const Text('保存',
-                                style: TextStyle(fontSize: 16)),
+                            child: Text(l10n.button_save,
+                                style: const TextStyle(fontSize: 16)),
                           ),
                         ),
                       ],
@@ -330,21 +332,17 @@ Future<String> _saveSignatureToFile(
   final canvas = Canvas(recorder);
   final size = Size(width, height);
 
-  // Draw white background
   final bgPaint = Paint()..color = Colors.white;
   canvas.drawRect(Offset.zero & size, bgPaint);
 
-  // Draw signature
   final signaturePainter = SignaturePainter(points: points);
   signaturePainter.paint(canvas, size);
 
-  // Convert to image
   final picture = recorder.endRecording();
   final img = await picture.toImage(size.width.toInt(), size.height.toInt());
   final byteData = await img.toByteData(format: ui.ImageByteFormat.png);
   final pngBytes = byteData!.buffer.asUint8List();
 
-  // Save to documents directory
   final tempDir = await getApplicationDocumentsDirectory();
   final file = File(path.join(tempDir.path, 'signature_$orderId.png'));
   await file.writeAsBytes(pngBytes);

@@ -1,6 +1,8 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 
+import '../../../l10n/l10n.dart';
+
 class NonOilProductsTable extends StatelessWidget {
   final List<ReceiptLineEntity> receiptLines;
 
@@ -10,15 +12,17 @@ class NonOilProductsTable extends StatelessWidget {
   Widget build(BuildContext context) {
     if (receiptLines.isEmpty) return const SizedBox.shrink();
 
+    final l10n = context.feulingDetailL10n;
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            '油外商品',
-            style: TextStyle(
+          Text(
+            l10n.non_oil_products_title,
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -40,11 +44,14 @@ class NonOilProductsTable extends StatelessWidget {
                       topRight: Radius.circular(16),
                     ),
                   ),
-                  child: const Row(
+                  child: Row(
                     children: [
-                      _HeaderCell(text: 'No.', flex: 1),
-                      _HeaderCell(text: '品名', flex: 4),
-                      _HeaderCell(text: '数量', flex: 2, alignRight: true),
+                      _HeaderCell(text: l10n.table_no_label, flex: 1),
+                      _HeaderCell(text: l10n.product_name_label, flex: 4),
+                      _HeaderCell(
+                          text: l10n.non_oil_quantity_label,
+                          flex: 2,
+                          alignRight: true),
                     ],
                   ),
                 ),
@@ -63,7 +70,8 @@ class NonOilProductsTable extends StatelessWidget {
                         _DataCell(text: '${index + 1}', flex: 1),
                         _DataCell(text: item.productName, flex: 4),
                         _DataCell(
-                          text: '${item.quantity ?? 0}個',
+                          text:
+                              '${item.quantity ?? 0}${l10n.non_oil_piece_unit}',
                           flex: 2,
                           alignRight: true,
                         ),

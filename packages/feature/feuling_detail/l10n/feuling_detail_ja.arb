@@ -1,0 +1,88 @@
+{
+  "@@locale": "ja",
+
+  "fueling_details_title": "給油明細",
+  "@fueling_details_title": {
+    "description": "給油明細画面のタイトル"
+  },
+
+  "no_order_info": "注文情報がありません",
+  "loading_text": "読み込み中...",
+  "submitting_text": "送信中...",
+  "saving_receipt_text": "保存中...",
+
+  "person_in_charge_label": "担当者",
+  "receipt_number_label": "伝票番号",
+  "customer_name_label": "お客様名",
+
+  "product_name_label": "品名",
+  "table_no_label": "No.",
+  "table_machine_name": "機械名",
+  "table_vehicle_number": "車体番号",
+  "table_quantity_liter": "数量(L)",
+  "table_total": "合計",
+
+  "non_oil_products_title": "油外商品",
+  "non_oil_quantity_label": "数量",
+  "non_oil_piece_unit": "個",
+  "non_oil_empty": "なし",
+
+  "signature_title": "受領サイン",
+  "signature_instruction": "現場責任者からサインを取得してください",
+  "signature_tap_to_sign": "タップしてサインを取得",
+  "signature_not_required": "サインは不要です",
+  "signature_load_error": "署名の読み込みに失敗しました",
+  "signature_saved": "サインが保存されました",
+  "signature_required_error": "サインを入力してください",
+  "signature_data_missing": "署名データが不足しています",
+
+  "button_back": "戻る",
+  "button_submit": "送信",
+  "button_print": "印刷",
+  "button_update_signature": "署名を更新",
+  "button_cancel": "キャンセル",
+  "button_save": "保存",
+
+  "submit_success_message": "注文が正常に送信されました ({receiptNumber})",
+  "@submit_success_message": {
+    "placeholders": {
+      "receiptNumber": {
+        "type": "String"
+      }
+    }
+  },
+
+  "submit_error_default": "オーダーの送信中にエラーが発生しました",
+  "offline_error": "ネットワーク接続がありません。注文はローカルに保存されています。",
+  "missing_order_receipt_id": "orderId または receiptId が見つかりません",
+  "update_receipt_file_error": "ファイルの更新に失敗しました",
+  "update_signature_error": "署名の更新に失敗しました",
+
+  "print_started": "印刷を開始しました",
+  "print_success": "印刷が完了しました",
+  "print_error": "印刷に失敗しました",
+
+  "receipt_title": "納品伝票",
+  "receipt_company_name": "出光興産（株）販売店",
+  "receipt_store_name": "株式会社　松林",
+  "receipt_station_brand": "apollostation",
+  "capture_error": "ビューのキャプチャに失敗しました",
+
+  "reiwa_date_format": "令和{year}年{month}月{day}日 ({dayOfWeek})",
+  "@reiwa_date_format": {
+    "placeholders": {
+      "year": { "type": "int" },
+      "month": { "type": "int" },
+      "day": { "type": "int" },
+      "dayOfWeek": { "type": "String" }
+    }
+  },
+
+  "day_monday": "月",
+  "day_tuesday": "火",
+  "day_wednesday": "水",
+  "day_thursday": "木",
+  "day_friday": "金",
+  "day_saturday": "土",
+  "day_sunday": "日"
+}

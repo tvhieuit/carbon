@@ -15,3 +15,6 @@ export 'src/screen/pages.dart';
 
 // Navigation
 export 'src/navigation/navigation.dart';
+
+// Localization
+export 'src/l10n/l10n.dart';

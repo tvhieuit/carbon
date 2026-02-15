@@ -8,6 +8,8 @@ class FeulingDetailNavigation {
 
   FeulingDetailNavigation(this._appRoute);
 
+  FeulingDetailAppRoute get appRoute => _appRoute;
+
   void goBack(BuildContext context) {
     context.maybePop();
   }

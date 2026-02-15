@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_app/di/injection.dart';
 import 'package:get_it/get_it.dart';
 import 'package:feature_qr_scan/feature_qr_scan.dart';
+import 'package:feature_feuling_detail/feuling_detail.dart';
 
 import '../l10n/app_localization.dart';
 import 'app_router.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
                 AppSettingsLocalizations.delegate,
                 DashboardLocalizations.delegate,
                 QrScanLocalizations.delegate,
+                FeulingDetailLocalizations.delegate,
               },
               supportedLocales: AppLocalizations.supportedLocales,
               theme: ThemeData(

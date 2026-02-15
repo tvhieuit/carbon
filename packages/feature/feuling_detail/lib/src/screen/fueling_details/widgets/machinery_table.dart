@@ -1,6 +1,8 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 
+import '../../../l10n/l10n.dart';
+
 class MachineryTable extends StatelessWidget {
   final List<MachineryItemEntity> machines;
 
@@ -8,6 +10,8 @@ class MachineryTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.feulingDetailL10n;
+
     // Group machines by productId
     final grouped = <String?, List<MachineryItemEntity>>{};
     for (final machine in machines) {
@@ -22,8 +26,8 @@ class MachineryTable extends StatelessWidget {
             machines.fold(0.0, (sum, m) => sum + (m.quantity ?? 0));
 
         return [
-          _buildProductGroup(context, productName, machines),
-          _buildTotalSection(total),
+          _buildProductGroup(context, l10n, productName, machines),
+          _buildTotalSection(l10n, total),
           const SizedBox(height: 8),
         ];
       }).toList(),
@@ -32,6 +36,7 @@ class MachineryTable extends StatelessWidget {
 
   Widget _buildProductGroup(
     BuildContext context,
+    FeulingDetailLocalizations l10n,
     String productName,
     List<MachineryItemEntity> machines,
   ) {
@@ -42,7 +47,7 @@ class MachineryTable extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '品名： $productName',
+            '${l10n.product_name_label}： $productName',
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -67,10 +72,10 @@ class MachineryTable extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      _buildHeaderCell('No.', 3, false),
-                      _buildHeaderCell('機械名', 8, false),
-                      _buildHeaderCell('車体番号', 8, false),
-                      _buildHeaderCell('数量(L)', 6, true),
+                      _buildHeaderCell(l10n.table_no_label, 3, false),
+                      _buildHeaderCell(l10n.table_machine_name, 8, false),
+                      _buildHeaderCell(l10n.table_vehicle_number, 8, false),
+                      _buildHeaderCell(l10n.table_quantity_liter, 6, true),
                     ],
                   ),
                 ),
@@ -106,16 +111,17 @@ class MachineryTable extends StatelessWidget {
     );
   }
 
-  Widget _buildTotalSection(double totalQuantity) {
+  Widget _buildTotalSection(
+      FeulingDetailLocalizations l10n, double totalQuantity) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            '合計',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          Text(
+            l10n.table_total,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           Text(
             totalQuantity.toStringAsFixed(2),

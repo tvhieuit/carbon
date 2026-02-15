@@ -1,4 +1,4 @@
-import 'package:app_core/app_core.dart';
+import 'package:app_widget/app_widget.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -59,9 +59,7 @@ class FuelingDetailsBloc
     // Refresh current state from latest data
     if (state.deliveryOrder == null) return;
 
-    final deliveryOrder = state.deliveryOrder!;
     final isDelivered = state.receiptNumber != null;
-    final hasSignature = deliveryOrder.constructionSiteId.isNotEmpty;
     final hasReceiptFile = state.isPrintEnabled;
 
     emit(state.copyWith(
@@ -77,13 +75,7 @@ class FuelingDetailsBloc
     emit(state.copyWith(isSubmitting: true, errorMessage: null));
 
     // Step 1: Upload signature file
-    final uploadResult =
-        await _uploadFileUseCase(event.signatureFilePath);
-
-    String? signatureFileId;
-    if (uploadResult.isSuccess) {
-      signatureFileId = uploadResult.dataOrNull;
-    }
+    await _uploadFileUseCase(event.signatureFilePath);
 
     // Step 2: Submit the order
     final result = await _submitOrderUseCase(event.deliveryOrder);

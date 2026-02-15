@@ -1,6 +1,7 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 
+import '../../../l10n/l10n.dart';
 import 'signature_painter.dart';
 
 /// Widget for rendering the receipt, used both for print preview and
@@ -23,6 +24,8 @@ class ReceiptView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.feulingDetailL10n;
+
     return Container(
       color: Colors.white,
       width: double.infinity,
@@ -30,35 +33,37 @@ class ReceiptView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildHeader(),
-          _buildCustomerInfo(),
+          _buildHeader(context, l10n),
+          _buildCustomerInfo(l10n),
           const Divider(height: 1, thickness: 1, color: Colors.grey),
-          _buildMachinerySection(),
+          _buildMachinerySection(l10n),
           const Divider(height: 1, thickness: 1, color: Colors.grey),
-          _buildNonOilSection(),
+          _buildNonOilSection(l10n),
           const Divider(height: 1, thickness: 1, color: Colors.grey),
-          _buildSignatureSection(),
+          _buildSignatureSection(l10n),
           const Divider(height: 1, thickness: 1, color: Colors.grey),
-          _buildFooter(),
+          _buildFooter(l10n),
         ],
       ),
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(
+      BuildContext context, FeulingDetailLocalizations l10n) {
     final now = DateTime.now();
-    final year = now.year - 2018; // Reiwa era
+    final year = now.year - 2018;
+    final dayOfWeek = _getDayOfWeekL10n(l10n, now.weekday);
     final japaneseDate =
-        '令和${year}年${now.month}月${now.day}日 (${_getDayOfWeek(now.weekday)})';
+        l10n.reiwa_date_format(year, now.month, now.day, dayOfWeek);
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(
-            '納品伝票',
-            style: TextStyle(
+          Text(
+            l10n.receipt_title,
+            style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
               color: Colors.black,
@@ -76,14 +81,16 @@ class ReceiptView extends StatelessWidget {
     );
   }
 
-  Widget _buildCustomerInfo() {
+  Widget _buildCustomerInfo(FeulingDetailLocalizations l10n) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Column(
         children: [
-          _buildInfoRow('伝票番号：', receiptNumber ?? ''),
-          _buildInfoRow('お客様名：', constructionSiteName ?? ''),
-          _buildInfoRow('担当者：', personInCharge ?? ''),
+          _buildInfoRow('${l10n.receipt_number_label}：', receiptNumber ?? ''),
+          _buildInfoRow(
+              '${l10n.customer_name_label}：', constructionSiteName ?? ''),
+          _buildInfoRow(
+              '${l10n.person_in_charge_label}：', personInCharge ?? ''),
         ],
       ),
     );
@@ -103,7 +110,7 @@ class ReceiptView extends StatelessWidget {
     );
   }
 
-  Widget _buildMachinerySection() {
+  Widget _buildMachinerySection(FeulingDetailLocalizations l10n) {
     final machines = deliveryOrder.constructionMachines;
     final total =
         machines.fold(0.0, (sum, m) => sum + (m.quantity ?? 0));
@@ -148,8 +155,8 @@ class ReceiptView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const Text('合計',
-                  style: TextStyle(
+              Text(l10n.table_total,
+                  style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black)),
@@ -166,22 +173,22 @@ class ReceiptView extends StatelessWidget {
     );
   }
 
-  Widget _buildNonOilSection() {
+  Widget _buildNonOilSection(FeulingDetailLocalizations l10n) {
     final lines = deliveryOrder.receiptLines;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('油外商品',
-              style: TextStyle(
+          Text(l10n.non_oil_products_title,
+              style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.black)),
           const SizedBox(height: 8),
           if (lines.isEmpty)
-            const Text('なし',
-                style: TextStyle(fontSize: 18, color: Colors.black))
+            Text(l10n.non_oil_empty,
+                style: const TextStyle(fontSize: 18, color: Colors.black))
           else
             ...lines.asMap().entries.map((entry) {
               final index = entry.key;
@@ -201,7 +208,8 @@ class ReceiptView extends StatelessWidget {
                                 fontSize: 18, color: Colors.black))),
                     SizedBox(
                         width: 80,
-                        child: Text('${item.quantity ?? 0}個',
+                        child: Text(
+                            '${item.quantity ?? 0}${l10n.non_oil_piece_unit}',
                             textAlign: TextAlign.right,
                             style: const TextStyle(
                                 fontSize: 18, color: Colors.black))),
@@ -214,14 +222,14 @@ class ReceiptView extends StatelessWidget {
     );
   }
 
-  Widget _buildSignatureSection() {
+  Widget _buildSignatureSection(FeulingDetailLocalizations l10n) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('受領サイン',
-              style: TextStyle(
+          Text(l10n.signature_title,
+              style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.black)),
@@ -247,32 +255,32 @@ class ReceiptView extends StatelessWidget {
     );
   }
 
-  Widget _buildFooter() {
-    return const Padding(
-      padding: EdgeInsets.all(16.0),
+  Widget _buildFooter(FeulingDetailLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(Icons.local_gas_station,
+              const Icon(Icons.local_gas_station,
                   size: 30, color: Colors.grey),
-              SizedBox(width: 4),
-              Text('apollostation',
-                  style: TextStyle(
+              const SizedBox(width: 4),
+              Text(l10n.receipt_station_brand,
+                  style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black)),
             ],
           ),
-          SizedBox(height: 8),
-          Text('出光興産（株）販売店',
-              style: TextStyle(
+          const SizedBox(height: 8),
+          Text(l10n.receipt_company_name,
+              style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.black)),
-          Text('株式会社　松林',
-              style: TextStyle(
+          Text(l10n.receipt_store_name,
+              style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.black)),
@@ -281,8 +289,24 @@ class ReceiptView extends StatelessWidget {
     );
   }
 
-  String _getDayOfWeek(int day) {
-    const days = ['月', '火', '水', '木', '金', '土', '日'];
-    return days[(day - 1) % 7];
+  String _getDayOfWeekL10n(FeulingDetailLocalizations l10n, int day) {
+    switch (day) {
+      case DateTime.monday:
+        return l10n.day_monday;
+      case DateTime.tuesday:
+        return l10n.day_tuesday;
+      case DateTime.wednesday:
+        return l10n.day_wednesday;
+      case DateTime.thursday:
+        return l10n.day_thursday;
+      case DateTime.friday:
+        return l10n.day_friday;
+      case DateTime.saturday:
+        return l10n.day_saturday;
+      case DateTime.sunday:
+        return l10n.day_sunday;
+      default:
+        return '';
+    }
   }
 }

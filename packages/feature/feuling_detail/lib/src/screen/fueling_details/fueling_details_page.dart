@@ -11,11 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../l10n/l10n.dart';
 import 'fueling_details_bloc.dart';
 import 'widgets/machinery_table.dart';
 import 'widgets/non_oil_products_table.dart';
 import 'widgets/receipt_view.dart';
-import 'widgets/signature_painter.dart';
 import 'widgets/signature_section.dart';
 
 @RoutePage()
@@ -61,9 +61,10 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.feulingDetailL10n;
+
     return BlocConsumer<FuelingDetailsBloc, FuelingDetailsState>(
       listener: (context, state) {
-        // Handle submit success → auto-capture receipt
         if (state.isSubmitSuccess && state.receiptNumber != null) {
           setState(() {
             _tempReceiptNumber = state.receiptNumber;
@@ -79,13 +80,13 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('注文が正常に送信されました (${state.receiptNumber})'),
+              content: Text(
+                  l10n.submit_success_message(state.receiptNumber!)),
               backgroundColor: Colors.green,
             ),
           );
         }
 
-        // Handle error messages
         if (state.errorMessage != null) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -99,7 +100,7 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
         return Scaffold(
           backgroundColor: const Color(0xFFF2F4F7),
           appBar: AppBar(
-            title: const Text('給油明細'),
+            title: Text(l10n.fueling_details_title),
             centerTitle: true,
             backgroundColor: Colors.white,
             elevation: 1,
@@ -117,10 +118,8 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
           ),
           body: Stack(
             children: [
-              // Main content
               _buildContent(context, state),
 
-              // Hidden receipt view for capture
               if (_showTemporaryReceiptView && widget.deliveryOrder != null)
                 Opacity(
                   opacity: 0.01,
@@ -140,10 +139,9 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
                   ),
                 ),
 
-              // Loading overlay
               if (state.isLoading || state.isSubmitting)
                 Container(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withValues(alpha: 0.3),
                   child: Center(
                     child: Card(
                       color: Colors.white,
@@ -155,8 +153,8 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
                             const CircularProgressIndicator(),
                             const SizedBox(height: 16),
                             Text(state.isSubmitting
-                                ? '送信中...'
-                                : '読み込み中...'),
+                                ? l10n.submitting_text
+                                : l10n.loading_text),
                           ],
                         ),
                       ),
@@ -171,9 +169,10 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
   }
 
   Widget _buildContent(BuildContext context, FuelingDetailsState state) {
+    final l10n = context.feulingDetailL10n;
     final deliveryOrder = widget.deliveryOrder;
     if (deliveryOrder == null) {
-      return const Center(child: Text('注文情報がありません'));
+      return Center(child: Text(l10n.no_order_info));
     }
 
     return SafeArea(
@@ -181,28 +180,16 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header
             _buildHeader(context, deliveryOrder),
-
-            // Machinery table grouped by product
-            MachineryTable(
-                machines: deliveryOrder.constructionMachines),
-
+            MachineryTable(machines: deliveryOrder.constructionMachines),
             const SizedBox(height: 8),
-
-            // Non-oil products
-            NonOilProductsTable(
-                receiptLines: deliveryOrder.receiptLines),
-
-            // Signature section
+            NonOilProductsTable(receiptLines: deliveryOrder.receiptLines),
             SignatureSection(
               signatureUrl: state.signatureUrl,
               signaturePoints: _signaturePoints,
               isEnabled: !state.isPrintEnabled && state.isSubmitEnabled,
               onTap: () => _onSignatureTap(context, deliveryOrder),
             ),
-
-            // Bottom buttons
             _buildBottomButtons(context, state, deliveryOrder),
           ],
         ),
@@ -212,12 +199,12 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
 
   Widget _buildHeader(
       BuildContext context, DeliveryOrderEntity deliveryOrder) {
+    final l10n = context.feulingDetailL10n;
     final now = DateTime.now();
-    final year = now.year - 2018; // Reiwa era
-    final days = ['月', '火', '水', '木', '金', '土', '日'];
-    final dayOfWeek = days[(now.weekday - 1) % 7];
+    final year = now.year - 2018;
+    final dayOfWeek = _getDayOfWeekL10n(l10n, now.weekday);
     final japaneseDate =
-        '令和${year}年${now.month}月${now.day}日 ($dayOfWeek)';
+        l10n.reiwa_date_format(year, now.month, now.day, dayOfWeek);
 
     return Container(
       width: double.infinity,
@@ -253,6 +240,7 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
     FuelingDetailsState state,
     DeliveryOrderEntity deliveryOrder,
   ) {
+    final l10n = context.feulingDetailL10n;
     final hasSignature =
         _signaturePoints != null && _signaturePoints!.isNotEmpty;
 
@@ -260,7 +248,6 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
       padding: const EdgeInsets.all(16.0),
       child: Row(
         children: [
-          // Back button
           Expanded(
             child: ElevatedButton(
               onPressed: () {
@@ -280,15 +267,13 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
                 ),
                 elevation: 0,
               ),
-              child: const Text(
-                '戻る',
-                style: TextStyle(fontWeight: FontWeight.bold),
+              child: Text(
+                l10n.button_back,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
           ),
           const SizedBox(width: 8),
-
-          // Submit / Print button
           Expanded(
             child: ElevatedButton(
               onPressed: state.isPrintEnabled
@@ -314,7 +299,9 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
                 disabledForegroundColor: Colors.grey.shade400,
               ),
               child: Text(
-                state.isPrintEnabled ? '印刷' : '送信',
+                state.isPrintEnabled
+                    ? l10n.button_print
+                    : l10n.button_submit,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
@@ -326,24 +313,23 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
 
   void _onSignatureTap(
       BuildContext context, DeliveryOrderEntity deliveryOrder) async {
+    final l10n = context.feulingDetailL10n;
     final result = await showSignaturePadDialog(
       context,
       orderId: deliveryOrder.orderId,
     );
 
-    if (result != null) {
+    if (result != null && mounted) {
       setState(() {
         _signaturePoints = result.points;
       });
 
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('サインが保存されました'),
-            backgroundColor: Colors.green,
-          ),
-        );
-      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.signature_saved),
+          backgroundColor: Colors.green,
+        ),
+      );
     }
   }
 
@@ -367,6 +353,8 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
     DeliveryOrderEntity deliveryOrder,
     String receiptNumber,
   ) async {
+    final l10n = context.feulingDetailL10n;
+
     setState(() {
       _showTemporaryReceiptView = true;
     });
@@ -409,7 +397,6 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
 
       if (pngBytes == null) return;
 
-      // Save and upload the receipt image
       final tempDir = await getApplicationDocumentsDirectory();
       final file = File(
           '${tempDir.path}/receipt_${deliveryOrder.orderId}.png');
@@ -424,11 +411,32 @@ class _FuelingDetailsViewState extends State<_FuelingDetailsView> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error capturing receipt: $e'),
+            content: Text('${l10n.capture_error}: $e'),
             backgroundColor: Colors.red,
           ),
         );
       }
+    }
+  }
+
+  String _getDayOfWeekL10n(FeulingDetailLocalizations l10n, int day) {
+    switch (day) {
+      case DateTime.monday:
+        return l10n.day_monday;
+      case DateTime.tuesday:
+        return l10n.day_tuesday;
+      case DateTime.wednesday:
+        return l10n.day_wednesday;
+      case DateTime.thursday:
+        return l10n.day_thursday;
+      case DateTime.friday:
+        return l10n.day_friday;
+      case DateTime.saturday:
+        return l10n.day_saturday;
+      case DateTime.sunday:
+        return l10n.day_sunday;
+      default:
+        return '';
     }
   }
 }
