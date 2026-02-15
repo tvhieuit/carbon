@@ -54,6 +54,7 @@ dependencies:
   feature_order_detail: any
   feature_app_settings: any
   feature_delivery_creation: any
+  feature_feuling_detail: any
   fluttertoast: any
 
 dev_dependencies:

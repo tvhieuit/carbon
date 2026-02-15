@@ -1,7 +1,7 @@
 import 'package:app_core/app_core.dart';
 import 'package:domain/domain.dart';
 import 'package:injectable/injectable.dart';
-import '../base_use_case.dart';
+import 'package:use_cases/use_cases.dart';
 
 @injectable
 class GetOrderMachinesUseCase implements UseCaseWithParams<List<MachineryItemEntity>, String> {

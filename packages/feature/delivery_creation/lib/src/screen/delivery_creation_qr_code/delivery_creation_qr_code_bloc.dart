@@ -3,7 +3,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:use_cases/use_cases.dart';
+import '../../use_case/use_cases.dart';
 
 part 'delivery_creation_qr_code_event.dart';
 part 'delivery_creation_qr_code_state.dart';

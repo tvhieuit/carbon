@@ -5,4 +5,5 @@ export 'product_repository.dart';
 export 'auth_repository.dart';
 export 'staff_repository.dart';
 export 'qrcode_repository.dart';
+export 'fueling_repository.dart';
 export 'local/local.dart';

@@ -1,0 +1,52 @@
+name: feature_feuling_detail
+description: Fueling Detail feature package - confirmation, signature and receipt
+publish_to: 'none'
+version: 0.0.1
+
+resolution: workspace
+
+environment:
+  sdk: '>=3.9.0 <4.0.0'
+  flutter: '>=3.38.8 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Domain layer
+  domain: any
+  use_cases: any
+
+  # State Management
+  flutter_bloc: any
+
+  # Dependency Injection
+  get_it: any
+  injectable: any
+
+  # Code Generation
+  freezed_annotation: any
+  json_annotation: any
+
+  # Routing
+  auto_route: any
+
+  # Common packages
+  app_widget: any
+  app_utility: any
+  app_core: any
+  feature_auth: any
+
+  # File & Path
+  path_provider: any
+  path: any
+  connectivity_plus: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: any
+  freezed: any
+  json_serializable: any
+  injectable_generator: any
+  auto_route_generator: any

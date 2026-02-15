@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 
-import '../bloc/delivery_creation_qr_code_bloc.dart';
-import '../l10n/l10n.dart';
-import 'add_machinery_dialog.dart';
+import '../../l10n/l10n.dart';
+import 'delivery_creation_qr_code_bloc.dart';
+import 'widgets/add_machinery_dialog.dart';
 
 @RoutePage()
 class DeliveryCreationQrCodePage extends StatelessWidget {

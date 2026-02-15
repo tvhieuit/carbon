@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:use_cases/use_cases.dart';
 
-import '../l10n/l10n.dart';
+import '../../../l10n/l10n.dart';
 
 class AddMachineryDialog extends StatefulWidget {
   final String orderId;

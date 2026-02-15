@@ -1,0 +1,1 @@
+export 'delivery_creation_qr_code/delivery_creation_qr_code_page.dart';
