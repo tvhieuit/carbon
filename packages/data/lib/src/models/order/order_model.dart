@@ -48,6 +48,7 @@ sealed class OrderLineModel with _$OrderLineModel {
 
   const factory OrderLineModel({
     required String id,
+    @JsonKey(name: 'product_id') String? productId,
     @JsonKey(name: 'product_name') String? productName,
     double? quantity,
   }) = _OrderLineModel;
@@ -56,6 +57,7 @@ sealed class OrderLineModel with _$OrderLineModel {
 
   OrderLineEntity toEntity() => OrderLineEntity(
     id: id,
+    productId: productId,
     productName: productName,
     quantity: quantity,
   );

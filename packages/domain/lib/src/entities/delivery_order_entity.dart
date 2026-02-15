@@ -8,6 +8,7 @@ part 'delivery_order_entity.g.dart';
 @modelFreezed
 sealed class DeliveryOrderEntity with _$DeliveryOrderEntity {
   const factory DeliveryOrderEntity({
+    String? id,
     required String orderId,
     required String orderLineId,
     required String constructionSiteId,

@@ -23,10 +23,14 @@ dependencies:
 
   # Local Storage
   shared_preferences: any
+  sqflite: any
+  path: any
+  path_provider: any
 
   # Code Generation
   freezed_annotation: any
   json_annotation: any
+  uuid: any
 
 dev_dependencies:
   flutter_test:

@@ -28,6 +28,7 @@ sealed class OrderEntity with _$OrderEntity {
 sealed class OrderLineEntity with _$OrderLineEntity {
   const factory OrderLineEntity({
     required String id,
+    @JsonKey(name: 'product_id') String? productId,
     @JsonKey(name: 'product_name') String? productName,
     double? quantity,
   }) = _OrderLineEntity;
