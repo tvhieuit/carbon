@@ -24,6 +24,7 @@ class DeliveryTable extends StatelessWidget {
           _buildHeader(l10n),
           Expanded(
             child: ListView.separated(
+              physics: const ClampingScrollPhysics(),
               itemCount: timeSlots.length,
               separatorBuilder: (context, index) => const Divider(height: 1, color: Color(0xFFCECECE)),
               itemBuilder: (context, index) {
