@@ -1,7 +1,4 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -9,76 +6,6 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
-            "cwd": "${workspaceFolder}/apps/flutter_app",
-            "program": "lib/main.dart",
-            "args": [
-                "--flavor",
-                "dev",
-                "--dart-define-from-file=configs/dev.json"
-            ]
-        },
-        {
-            "name": "Flutter App - Run (Android) - No Flavor",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "debug",
-            "cwd": "${workspaceFolder}/apps/flutter_app",
-            "program": "lib/main.dart",
-            "args": []
-        },
-        {
-            "name": "Flutter App - Development (Android)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "debug",
-            "cwd": "${workspaceFolder}/apps/flutter_app",
-            "program": "lib/main.dart",
-            "args": [
-                "--flavor",
-                "dev",
-                "--dart-define-from-file=configs/dev.json"
-            ]
-        },
-        {
-            "name": "Flutter App - Staging (Android)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "debug",
-            "cwd": "${workspaceFolder}/apps/flutter_app",
-            "program": "lib/main.dart",
-            "args": [
-                "--dart-define-from-file=configs/stg.json"
-            ]
-        },
-        {
-            "name": "Flutter App - Beta (Android)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "debug",
-            "cwd": "${workspaceFolder}/apps/flutter_app",
-            "program": "lib/main.dart",
-            "args": [
-                "--dart-define-from-file=configs/beta.json"
-            ]
-        },
-        {
-            "name": "Flutter App - Development (Android) - Profile",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile",
-            "cwd": "${workspaceFolder}/apps/flutter_app",
-            "program": "lib/main.dart",
-            "args": [
-                "--flavor",
-                "dev",
-                "--dart-define-from-file=configs/dev.json"
-            ]
-        },
-        {
-            "name": "Flutter App - Development (Android) - Release",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release",
             "cwd": "${workspaceFolder}/apps/flutter_app",
             "program": "lib/main.dart",
             "args": [

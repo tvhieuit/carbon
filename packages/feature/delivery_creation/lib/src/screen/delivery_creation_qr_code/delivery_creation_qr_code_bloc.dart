@@ -58,7 +58,7 @@ class DeliveryCreationQrCodeBloc extends Bloc<DeliveryCreationQrCodeEvent, Deliv
       );
       final receiptLines =
           productsResult.dataOrNull
-              ?.map((e) => ReceiptLineEntity(productId: e.id, productName: e.productName ?? ''))
+              ?.map((e) => ReceiptLineEntity(productId: e.productId, productName: e.productName))
               .toList() ??
           [];
       if (productsResult.isFailure) {
