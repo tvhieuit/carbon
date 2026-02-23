@@ -1,4 +1,4 @@
-import 'package:feature_delivery_creation/delivery_creation.dart' as delivery;
+import 'package:feature_delivery_creation/feature_delivery_creation.dart' as delivery;
 import 'package:injectable/injectable.dart';
 
 import '../app/delivery_creation_routes.dart';

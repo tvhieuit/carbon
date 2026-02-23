@@ -1,10 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(fvm dart pub get:*)",
-      "Bash(fvm dart run:*)",
-      "Bash(fvm dart analyze:*)",
-      "Bash(fvm flutter gen-l10n:*)"
+      "Bash(ml *)"
     ]
   }
 }

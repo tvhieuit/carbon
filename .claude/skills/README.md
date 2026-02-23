@@ -8,6 +8,15 @@ Skills are custom commands you can invoke with `/skill-name` to automate common 
 
 ### 🔨 Development Skills
 
+#### `/run-app [flavor] [mode]`
+Run the Flutter app with different configurations.
+```bash
+/run-app              # Run in dev mode (default)
+/run-app dev          # Run in development
+/run-app staging      # Run in staging
+/run-app prod release # Run production release build
+```
+
 #### `/build [package]`
 Run build_runner to generate code.
 ```bash
@@ -122,6 +131,19 @@ Guide architectural refactoring.
 
 ## 🚀 Quick Start
 
+### Example Workflow: Running the App
+
+```bash
+# 1. Build all packages
+/build all
+
+# 2. Run the app in development
+/run-app dev
+
+# 3. Or run in profile mode for performance testing
+/run-app dev profile
+```
+
 ### Example Workflow: Adding a New Feature
 
 ```bash
@@ -150,6 +172,9 @@ Guide architectural refactoring.
 
 # 7. Analyze for issues
 /analyze feature/notifications
+
+# 8. Run the app to test
+/run-app dev
 ```
 
 ### Example Workflow: Debugging an Error
