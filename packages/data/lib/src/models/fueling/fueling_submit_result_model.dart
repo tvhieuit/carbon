@@ -1,11 +1,14 @@
+import 'package:app_core/app_core.dart';
 import 'package:domain/domain.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'fueling_submit_result_model.freezed.dart';
 part 'fueling_submit_result_model.g.dart';
 
-@freezed
+@modelFreezed
 sealed class FuelingSubmitResultModel with _$FuelingSubmitResultModel {
+  const FuelingSubmitResultModel._();
+
   const factory FuelingSubmitResultModel({
     @JsonKey(name: 'order_id') String? orderId,
     @JsonKey(name: 'receipt_id') String? receiptId,
@@ -25,9 +28,7 @@ sealed class FuelingSubmitResultModel with _$FuelingSubmitResultModel {
       message: entity.message,
     );
   }
-}
 
-extension FuelingSubmitResultModelX on FuelingSubmitResultModel {
   FuelingSubmitResultEntity toEntity() {
     return FuelingSubmitResultEntity(
       orderId: orderId,

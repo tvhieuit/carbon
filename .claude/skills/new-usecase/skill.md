@@ -7,9 +7,12 @@ Create a new use case with proper structure.
 
 Template to follow:
 
+IMPORTANT: Use @paramsFreezed for parameters (NOT @freezed)
+
 ```dart
 import 'package:app_core/app_core.dart';
 import 'package:injectable/injectable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 // For use cases without parameters
 @lazySingleton
@@ -24,8 +27,8 @@ class YourUseCase extends UseCase<ReturnType> {
   }
 }
 
-// OR for use cases with parameters
-@freezed
+// OR for use cases with parameters - use @paramsFreezed
+@paramsFreezed
 class YourUseCaseParams with _$YourUseCaseParams {
   const factory YourUseCaseParams({
     required String param1,

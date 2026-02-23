@@ -24,6 +24,7 @@
 # Fix issues
 /debug                           # Debug assistant
 /fix-imports                     # Organize imports
+/fix-annotations                 # Fix Freezed annotations
 /clean all                       # Clean and rebuild
 
 # Learn & document

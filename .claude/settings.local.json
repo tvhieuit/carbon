@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ml *)"
+      "Bash(ml *)",
+      "Bash(fvm dart run:*)",
+      "Bash(grep:*)"
     ]
   }
 }

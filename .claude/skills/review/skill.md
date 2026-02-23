@@ -16,7 +16,14 @@ Review checklist:
 
 ## Code Quality
 - [ ] Proper error handling with Result<T>
-- [ ] Use of proper annotations (@eventFreezed, @stateFreezed, etc.)
+- [ ] Use of proper custom annotations:
+  - Data models use `@modelFreezed` (NOT `@freezed`)
+  - BLoC events use `@eventFreezed`
+  - BLoC states use `@stateFreezed`
+  - Use case params use `@paramsFreezed`
+  - Result types use `@resultFreezed`
+- [ ] Freezed classes with custom methods have private constructor: `const ClassName._();`
+- [ ] Data models import `package:app_core/app_core.dart` for custom annotations
 - [ ] Consistent naming conventions
 - [ ] No code duplication
 - [ ] Comments only where necessary

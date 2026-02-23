@@ -7,15 +7,20 @@ Create a new BLoC following the project conventions.
 
 Template structure:
 
+IMPORTANT: Always use custom annotations from app_core!
+
 ```dart
-// Events
+import 'package:app_core/app_core.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+// Events - use @eventFreezed (NOT @freezed)
 @eventFreezed
 class YourEvent with _$YourEvent {
   const factory YourEvent.started() = _Started;
   const factory YourEvent.actionRequested(String param) = _ActionRequested;
 }
 
-// States
+// States - use @stateFreezed (NOT @freezed)
 @stateFreezed
 class YourState with _$YourState {
   const factory YourState.initial() = _Initial;

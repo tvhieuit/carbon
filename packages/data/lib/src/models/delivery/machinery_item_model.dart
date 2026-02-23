@@ -1,11 +1,14 @@
+import 'package:app_core/app_core.dart';
 import 'package:domain/domain.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'machinery_item_model.freezed.dart';
 part 'machinery_item_model.g.dart';
 
-@freezed
+@modelFreezed
 sealed class MachineryItemModel with _$MachineryItemModel {
+  const MachineryItemModel._();
+
   const factory MachineryItemModel({
     @JsonKey(name: 'machine_id') required String machineId,
     @JsonKey(name: 'machinery_name') required String machineryName,

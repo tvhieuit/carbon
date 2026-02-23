@@ -85,6 +85,13 @@ Fix and organize imports.
 /fix-imports domain  # Fix imports in whole package
 ```
 
+#### `/fix-annotations`
+Check and fix Freezed annotation usage.
+```bash
+/fix-annotations
+# Ensures @modelFreezed, @eventFreezed, @stateFreezed usage
+```
+
 ### 🧪 Testing Skills
 
 #### `/test [package]`

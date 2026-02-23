@@ -1,3 +1,4 @@
+import 'package:app_core/app_core.dart';
 import 'package:domain/domain.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'machinery_item_model.dart';
@@ -5,8 +6,10 @@ import 'machinery_item_model.dart';
 part 'delivery_order_model.freezed.dart';
 part 'delivery_order_model.g.dart';
 
-@freezed
+@modelFreezed
 sealed class DeliveryOrderModel with _$DeliveryOrderModel {
+  const DeliveryOrderModel._();
+
   const factory DeliveryOrderModel({
     @JsonKey(name: 'order_id') required String orderId,
     @JsonKey(name: 'order_line_id') required String orderLineId,
@@ -38,8 +41,10 @@ sealed class DeliveryOrderModel with _$DeliveryOrderModel {
   }
 }
 
-@freezed
+@modelFreezed
 sealed class ReceiptLineModel with _$ReceiptLineModel {
+  const ReceiptLineModel._();
+
   const factory ReceiptLineModel({
     @JsonKey(name: 'product_id') required String productId,
     @JsonKey(name: 'product_name') required String productName,
