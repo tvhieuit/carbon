@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'feuling_detail_localizations_en.dart';
 import 'feuling_detail_localizations_ja.dart';
 
 // ignore_for_file: type=lint
@@ -89,330 +90,330 @@ abstract class FeulingDetailLocalizations {
   ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('ja')];
+  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('ja')];
 
-  /// 給油明細画面のタイトル
+  /// Title for fueling details screen
   ///
-  /// In ja, this message translates to:
-  /// **'給油明細'**
+  /// In en, this message translates to:
+  /// **'Fueling Details'**
   String get fueling_details_title;
 
   /// No description provided for @no_order_info.
   ///
-  /// In ja, this message translates to:
-  /// **'注文情報がありません'**
+  /// In en, this message translates to:
+  /// **'No order information available'**
   String get no_order_info;
 
   /// No description provided for @loading_text.
   ///
-  /// In ja, this message translates to:
-  /// **'読み込み中...'**
+  /// In en, this message translates to:
+  /// **'Loading...'**
   String get loading_text;
 
   /// No description provided for @submitting_text.
   ///
-  /// In ja, this message translates to:
-  /// **'送信中...'**
+  /// In en, this message translates to:
+  /// **'Submitting...'**
   String get submitting_text;
 
   /// No description provided for @saving_receipt_text.
   ///
-  /// In ja, this message translates to:
-  /// **'保存中...'**
+  /// In en, this message translates to:
+  /// **'Saving...'**
   String get saving_receipt_text;
 
   /// No description provided for @person_in_charge_label.
   ///
-  /// In ja, this message translates to:
-  /// **'担当者'**
+  /// In en, this message translates to:
+  /// **'Person in Charge'**
   String get person_in_charge_label;
 
   /// No description provided for @receipt_number_label.
   ///
-  /// In ja, this message translates to:
-  /// **'伝票番号'**
+  /// In en, this message translates to:
+  /// **'Receipt Number'**
   String get receipt_number_label;
 
   /// No description provided for @customer_name_label.
   ///
-  /// In ja, this message translates to:
-  /// **'お客様名'**
+  /// In en, this message translates to:
+  /// **'Customer Name'**
   String get customer_name_label;
 
   /// No description provided for @product_name_label.
   ///
-  /// In ja, this message translates to:
-  /// **'品名'**
+  /// In en, this message translates to:
+  /// **'Product Name'**
   String get product_name_label;
 
   /// No description provided for @table_no_label.
   ///
-  /// In ja, this message translates to:
+  /// In en, this message translates to:
   /// **'No.'**
   String get table_no_label;
 
   /// No description provided for @table_machine_name.
   ///
-  /// In ja, this message translates to:
-  /// **'機械名'**
+  /// In en, this message translates to:
+  /// **'Machine Name'**
   String get table_machine_name;
 
   /// No description provided for @table_vehicle_number.
   ///
-  /// In ja, this message translates to:
-  /// **'車体番号'**
+  /// In en, this message translates to:
+  /// **'Vehicle Number'**
   String get table_vehicle_number;
 
   /// No description provided for @table_quantity_liter.
   ///
-  /// In ja, this message translates to:
-  /// **'数量(L)'**
+  /// In en, this message translates to:
+  /// **'Quantity (L)'**
   String get table_quantity_liter;
 
   /// No description provided for @table_total.
   ///
-  /// In ja, this message translates to:
-  /// **'合計'**
+  /// In en, this message translates to:
+  /// **'Total'**
   String get table_total;
 
   /// No description provided for @non_oil_products_title.
   ///
-  /// In ja, this message translates to:
-  /// **'油外商品'**
+  /// In en, this message translates to:
+  /// **'Non-Oil Products'**
   String get non_oil_products_title;
 
   /// No description provided for @non_oil_quantity_label.
   ///
-  /// In ja, this message translates to:
-  /// **'数量'**
+  /// In en, this message translates to:
+  /// **'Quantity'**
   String get non_oil_quantity_label;
 
   /// No description provided for @non_oil_piece_unit.
   ///
-  /// In ja, this message translates to:
-  /// **'個'**
+  /// In en, this message translates to:
+  /// **'pcs'**
   String get non_oil_piece_unit;
 
   /// No description provided for @non_oil_empty.
   ///
-  /// In ja, this message translates to:
-  /// **'なし'**
+  /// In en, this message translates to:
+  /// **'None'**
   String get non_oil_empty;
 
   /// No description provided for @signature_title.
   ///
-  /// In ja, this message translates to:
-  /// **'受領サイン'**
+  /// In en, this message translates to:
+  /// **'Receipt Signature'**
   String get signature_title;
 
   /// No description provided for @signature_instruction.
   ///
-  /// In ja, this message translates to:
-  /// **'現場責任者からサインを取得してください'**
+  /// In en, this message translates to:
+  /// **'Please obtain signature from site manager'**
   String get signature_instruction;
 
   /// No description provided for @signature_tap_to_sign.
   ///
-  /// In ja, this message translates to:
-  /// **'タップしてサインを取得'**
+  /// In en, this message translates to:
+  /// **'Tap to sign'**
   String get signature_tap_to_sign;
 
   /// No description provided for @signature_not_required.
   ///
-  /// In ja, this message translates to:
-  /// **'サインは不要です'**
+  /// In en, this message translates to:
+  /// **'Signature not required'**
   String get signature_not_required;
 
   /// No description provided for @signature_load_error.
   ///
-  /// In ja, this message translates to:
-  /// **'署名の読み込みに失敗しました'**
+  /// In en, this message translates to:
+  /// **'Failed to load signature'**
   String get signature_load_error;
 
   /// No description provided for @signature_saved.
   ///
-  /// In ja, this message translates to:
-  /// **'サインが保存されました'**
+  /// In en, this message translates to:
+  /// **'Signature saved'**
   String get signature_saved;
 
   /// No description provided for @signature_required_error.
   ///
-  /// In ja, this message translates to:
-  /// **'サインを入力してください'**
+  /// In en, this message translates to:
+  /// **'Please provide signature'**
   String get signature_required_error;
 
   /// No description provided for @signature_data_missing.
   ///
-  /// In ja, this message translates to:
-  /// **'署名データが不足しています'**
+  /// In en, this message translates to:
+  /// **'Signature data is missing'**
   String get signature_data_missing;
 
   /// No description provided for @button_back.
   ///
-  /// In ja, this message translates to:
-  /// **'戻る'**
+  /// In en, this message translates to:
+  /// **'Back'**
   String get button_back;
 
   /// No description provided for @button_submit.
   ///
-  /// In ja, this message translates to:
-  /// **'送信'**
+  /// In en, this message translates to:
+  /// **'Submit'**
   String get button_submit;
 
   /// No description provided for @button_print.
   ///
-  /// In ja, this message translates to:
-  /// **'印刷'**
+  /// In en, this message translates to:
+  /// **'Print'**
   String get button_print;
 
   /// No description provided for @button_update_signature.
   ///
-  /// In ja, this message translates to:
-  /// **'署名を更新'**
+  /// In en, this message translates to:
+  /// **'Update Signature'**
   String get button_update_signature;
 
   /// No description provided for @button_cancel.
   ///
-  /// In ja, this message translates to:
-  /// **'キャンセル'**
+  /// In en, this message translates to:
+  /// **'Cancel'**
   String get button_cancel;
 
   /// No description provided for @button_save.
   ///
-  /// In ja, this message translates to:
-  /// **'保存'**
+  /// In en, this message translates to:
+  /// **'Save'**
   String get button_save;
 
   /// No description provided for @submit_success_message.
   ///
-  /// In ja, this message translates to:
-  /// **'注文が正常に送信されました ({receiptNumber})'**
+  /// In en, this message translates to:
+  /// **'Order submitted successfully ({receiptNumber})'**
   String submit_success_message(String receiptNumber);
 
   /// No description provided for @submit_error_default.
   ///
-  /// In ja, this message translates to:
-  /// **'オーダーの送信中にエラーが発生しました'**
+  /// In en, this message translates to:
+  /// **'Error occurred while submitting order'**
   String get submit_error_default;
 
   /// No description provided for @offline_error.
   ///
-  /// In ja, this message translates to:
-  /// **'ネットワーク接続がありません。注文はローカルに保存されています。'**
+  /// In en, this message translates to:
+  /// **'No network connection. Order saved locally.'**
   String get offline_error;
 
   /// No description provided for @missing_order_receipt_id.
   ///
-  /// In ja, this message translates to:
-  /// **'orderId または receiptId が見つかりません'**
+  /// In en, this message translates to:
+  /// **'Order ID or Receipt ID not found'**
   String get missing_order_receipt_id;
 
   /// No description provided for @update_receipt_file_error.
   ///
-  /// In ja, this message translates to:
-  /// **'ファイルの更新に失敗しました'**
+  /// In en, this message translates to:
+  /// **'Failed to update file'**
   String get update_receipt_file_error;
 
   /// No description provided for @update_signature_error.
   ///
-  /// In ja, this message translates to:
-  /// **'署名の更新に失敗しました'**
+  /// In en, this message translates to:
+  /// **'Failed to update signature'**
   String get update_signature_error;
 
   /// No description provided for @print_started.
   ///
-  /// In ja, this message translates to:
-  /// **'印刷を開始しました'**
+  /// In en, this message translates to:
+  /// **'Print started'**
   String get print_started;
 
   /// No description provided for @print_success.
   ///
-  /// In ja, this message translates to:
-  /// **'印刷が完了しました'**
+  /// In en, this message translates to:
+  /// **'Print completed'**
   String get print_success;
 
   /// No description provided for @print_error.
   ///
-  /// In ja, this message translates to:
-  /// **'印刷に失敗しました'**
+  /// In en, this message translates to:
+  /// **'Print failed'**
   String get print_error;
 
   /// No description provided for @receipt_title.
   ///
-  /// In ja, this message translates to:
-  /// **'納品伝票'**
+  /// In en, this message translates to:
+  /// **'Delivery Receipt'**
   String get receipt_title;
 
   /// No description provided for @receipt_company_name.
   ///
-  /// In ja, this message translates to:
-  /// **'出光興産（株）販売店'**
+  /// In en, this message translates to:
+  /// **'Idemitsu Kosan Co., Ltd. Dealer'**
   String get receipt_company_name;
 
   /// No description provided for @receipt_store_name.
   ///
-  /// In ja, this message translates to:
-  /// **'株式会社　松林'**
+  /// In en, this message translates to:
+  /// **'Matsubayashi Corporation'**
   String get receipt_store_name;
 
   /// No description provided for @receipt_station_brand.
   ///
-  /// In ja, this message translates to:
+  /// In en, this message translates to:
   /// **'apollostation'**
   String get receipt_station_brand;
 
   /// No description provided for @capture_error.
   ///
-  /// In ja, this message translates to:
-  /// **'ビューのキャプチャに失敗しました'**
+  /// In en, this message translates to:
+  /// **'Failed to capture view'**
   String get capture_error;
 
   /// No description provided for @reiwa_date_format.
   ///
-  /// In ja, this message translates to:
-  /// **'令和{year}年{month}月{day}日 ({dayOfWeek})'**
+  /// In en, this message translates to:
+  /// **'Reiwa {year}/{month}/{day} ({dayOfWeek})'**
   String reiwa_date_format(int year, int month, int day, String dayOfWeek);
 
   /// No description provided for @day_monday.
   ///
-  /// In ja, this message translates to:
-  /// **'月'**
+  /// In en, this message translates to:
+  /// **'Mon'**
   String get day_monday;
 
   /// No description provided for @day_tuesday.
   ///
-  /// In ja, this message translates to:
-  /// **'火'**
+  /// In en, this message translates to:
+  /// **'Tue'**
   String get day_tuesday;
 
   /// No description provided for @day_wednesday.
   ///
-  /// In ja, this message translates to:
-  /// **'水'**
+  /// In en, this message translates to:
+  /// **'Wed'**
   String get day_wednesday;
 
   /// No description provided for @day_thursday.
   ///
-  /// In ja, this message translates to:
-  /// **'木'**
+  /// In en, this message translates to:
+  /// **'Thu'**
   String get day_thursday;
 
   /// No description provided for @day_friday.
   ///
-  /// In ja, this message translates to:
-  /// **'金'**
+  /// In en, this message translates to:
+  /// **'Fri'**
   String get day_friday;
 
   /// No description provided for @day_saturday.
   ///
-  /// In ja, this message translates to:
-  /// **'土'**
+  /// In en, this message translates to:
+  /// **'Sat'**
   String get day_saturday;
 
   /// No description provided for @day_sunday.
   ///
-  /// In ja, this message translates to:
-  /// **'日'**
+  /// In en, this message translates to:
+  /// **'Sun'**
   String get day_sunday;
 }
 
@@ -425,7 +426,7 @@ class _FeulingDetailLocalizationsDelegate extends LocalizationsDelegate<FeulingD
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ja'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'ja'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_FeulingDetailLocalizationsDelegate old) => false;
@@ -434,6 +435,8 @@ class _FeulingDetailLocalizationsDelegate extends LocalizationsDelegate<FeulingD
 FeulingDetailLocalizations lookupFeulingDetailLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'en':
+      return FeulingDetailLocalizationsEn();
     case 'ja':
       return FeulingDetailLocalizationsJa();
   }

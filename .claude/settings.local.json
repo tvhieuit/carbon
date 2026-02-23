@@ -3,7 +3,8 @@
     "allow": [
       "Bash(ml *)",
       "Bash(fvm dart run:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(fvm flutter gen-l10n:*)"
     ]
   }
 }

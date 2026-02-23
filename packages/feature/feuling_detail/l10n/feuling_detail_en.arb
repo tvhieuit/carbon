@@ -1,0 +1,88 @@
+{
+  "@@locale": "en",
+
+  "fueling_details_title": "Fueling Details",
+  "@fueling_details_title": {
+    "description": "Title for fueling details screen"
+  },
+
+  "no_order_info": "No order information available",
+  "loading_text": "Loading...",
+  "submitting_text": "Submitting...",
+  "saving_receipt_text": "Saving...",
+
+  "person_in_charge_label": "Person in Charge",
+  "receipt_number_label": "Receipt Number",
+  "customer_name_label": "Customer Name",
+
+  "product_name_label": "Product Name",
+  "table_no_label": "No.",
+  "table_machine_name": "Machine Name",
+  "table_vehicle_number": "Vehicle Number",
+  "table_quantity_liter": "Quantity (L)",
+  "table_total": "Total",
+
+  "non_oil_products_title": "Non-Oil Products",
+  "non_oil_quantity_label": "Quantity",
+  "non_oil_piece_unit": "pcs",
+  "non_oil_empty": "None",
+
+  "signature_title": "Receipt Signature",
+  "signature_instruction": "Please obtain signature from site manager",
+  "signature_tap_to_sign": "Tap to sign",
+  "signature_not_required": "Signature not required",
+  "signature_load_error": "Failed to load signature",
+  "signature_saved": "Signature saved",
+  "signature_required_error": "Please provide signature",
+  "signature_data_missing": "Signature data is missing",
+
+  "button_back": "Back",
+  "button_submit": "Submit",
+  "button_print": "Print",
+  "button_update_signature": "Update Signature",
+  "button_cancel": "Cancel",
+  "button_save": "Save",
+
+  "submit_success_message": "Order submitted successfully ({receiptNumber})",
+  "@submit_success_message": {
+    "placeholders": {
+      "receiptNumber": {
+        "type": "String"
+      }
+    }
+  },
+
+  "submit_error_default": "Error occurred while submitting order",
+  "offline_error": "No network connection. Order saved locally.",
+  "missing_order_receipt_id": "Order ID or Receipt ID not found",
+  "update_receipt_file_error": "Failed to update file",
+  "update_signature_error": "Failed to update signature",
+
+  "print_started": "Print started",
+  "print_success": "Print completed",
+  "print_error": "Print failed",
+
+  "receipt_title": "Delivery Receipt",
+  "receipt_company_name": "Idemitsu Kosan Co., Ltd. Dealer",
+  "receipt_store_name": "Matsubayashi Corporation",
+  "receipt_station_brand": "apollostation",
+  "capture_error": "Failed to capture view",
+
+  "reiwa_date_format": "Reiwa {year}/{month}/{day} ({dayOfWeek})",
+  "@reiwa_date_format": {
+    "placeholders": {
+      "year": { "type": "int" },
+      "month": { "type": "int" },
+      "day": { "type": "int" },
+      "dayOfWeek": { "type": "String" }
+    }
+  },
+
+  "day_monday": "Mon",
+  "day_tuesday": "Tue",
+  "day_wednesday": "Wed",
+  "day_thursday": "Thu",
+  "day_friday": "Fri",
+  "day_saturday": "Sat",
+  "day_sunday": "Sun"
+}

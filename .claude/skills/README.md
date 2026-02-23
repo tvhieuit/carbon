@@ -25,6 +25,13 @@ Run build_runner to generate code.
 /build  # Will ask which package
 ```
 
+#### `/l10n [package]`
+Generate localization files from ARB files.
+```bash
+/l10n feature/feuling_detail
+/l10n  # Will ask which package
+```
+
 #### `/new-usecase`
 Generate a new use case following Single Responsibility pattern.
 ```bash

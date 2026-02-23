@@ -1,5 +1,5 @@
 arb-dir: l10n
-template-arb-file: feuling_detail_ja.arb
+template-arb-file: feuling_detail_en.arb
 output-localization-file: feuling_detail_localizations.dart
 output-class: FeulingDetailLocalizations
 output-dir: lib/src/l10n

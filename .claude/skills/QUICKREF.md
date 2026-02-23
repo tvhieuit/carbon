@@ -11,6 +11,7 @@
 
 # Generate code
 /build domain                    # Run build_runner
+/l10n feature/auth               # Generate localizations
 /new-usecase                     # Create new use case
 /new-bloc                        # Create new BLoC
 /new-feature notifications       # Scaffold feature package
