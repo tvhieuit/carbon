@@ -37,6 +37,8 @@ dependencies:
   intl: any
   table_calendar: any
 
+  flutter_slidable: any
+
   app_widget: any
   app_utility: any
   app_core: any

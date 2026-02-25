@@ -10,5 +10,13 @@
   "statusCancelled": "キャンセル",
   "onSiteConfirmation": "現地確認",
   "requiredSignature": " (要サイン)",
-  "noData": "データなし"
+  "noData": "データなし",
+  "actionCopy": "コピー",
+  "actionEdit": "編集",
+  "actionDelete": "削除",
+  "orderCopied": "注文をコピーしました",
+  "deleteOrderConfirmTitle": "注文削除",
+  "deleteOrderConfirmMessage": "この注文を削除してもよろしいですか？",
+  "cancel": "キャンセル",
+  "confirm": "確認"
 }

@@ -2,6 +2,7 @@ import 'package:app_core/app_core.dart';
 import 'package:app_widget/app_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:domain/domain.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -30,6 +31,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     on<_SelectStaff>(_onSelectStaff);
     on<_NavigateToOrderDetail>(_onNavigateToOrderDetail);
     on<_QrScanPressed>(_onQrScanPressed);
+    on<_CopyOrder>(_onCopyOrder);
+    on<_EditOrder>(_onEditOrder);
+    on<_DeleteOrder>(_onDeleteOrder);
 
     add(const DashboardEvent.started());
   }
@@ -142,5 +146,29 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   void _onQrScanPressed(_QrScanPressed event, emit) {
     _router.push(_appRoute.qrScan);
+  }
+
+  Future<void> _onCopyOrder(_CopyOrder event, emit) async {
+    final order = event.order;
+    final orderLines = order.orderLines
+        .map((line) => '${line.productName ?? '-'}: ${line.quantity?.toInt() ?? '-'}')
+        .join(', ');
+    final text = '${order.companyName} | ${order.constructionSiteName} | '
+        '${order.refuelingFromTime}-${order.refuelingToTime} | $orderLines';
+    await Clipboard.setData(ClipboardData(text: text));
+    _toast.success('Order copied');
+  }
+
+  Future<void> _onEditOrder(_EditOrder event, emit) async {
+    // Navigate to order detail for editing
+    _router.push(_appRoute.dashboard); // TODO: Replace with actual edit route
+  }
+
+  Future<void> _onDeleteOrder(_DeleteOrder event, emit) async {
+    // Remove the order from local state
+    final updatedOrders = state.orders.where((o) => o.id != event.order.id).toList();
+    emit(state.copyWith(orders: updatedOrders));
+    // TODO: Call API to delete the order on the server
+    _toast.success('Order deleted');
   }
 }

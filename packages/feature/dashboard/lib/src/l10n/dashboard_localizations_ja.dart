@@ -40,4 +40,28 @@ class DashboardLocalizationsJa extends DashboardLocalizations {
 
   @override
   String get noData => 'データなし';
+
+  @override
+  String get actionCopy => 'コピー';
+
+  @override
+  String get actionEdit => '編集';
+
+  @override
+  String get actionDelete => '削除';
+
+  @override
+  String get orderCopied => '注文をコピーしました';
+
+  @override
+  String get deleteOrderConfirmTitle => '注文削除';
+
+  @override
+  String get deleteOrderConfirmMessage => 'この注文を削除してもよろしいですか？';
+
+  @override
+  String get cancel => 'キャンセル';
+
+  @override
+  String get confirm => '確認';
 }

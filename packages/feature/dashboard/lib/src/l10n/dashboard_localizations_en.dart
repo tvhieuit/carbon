@@ -40,4 +40,28 @@ class DashboardLocalizationsEn extends DashboardLocalizations {
 
   @override
   String get noData => 'No Data';
+
+  @override
+  String get actionCopy => 'Copy';
+
+  @override
+  String get actionEdit => 'Edit';
+
+  @override
+  String get actionDelete => 'Delete';
+
+  @override
+  String get orderCopied => 'Order copied';
+
+  @override
+  String get deleteOrderConfirmTitle => 'Delete Order';
+
+  @override
+  String get deleteOrderConfirmMessage => 'Are you sure you want to delete this order?';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get confirm => 'Confirm';
 }

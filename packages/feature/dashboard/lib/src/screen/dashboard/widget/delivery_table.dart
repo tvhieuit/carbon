@@ -1,6 +1,9 @@
 import 'package:domain/domain.dart';
 import 'package:feature_dashboard/src/l10n/l10n.dart';
+import 'package:feature_dashboard/src/screen/dashboard/dashboard_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class DeliveryTable extends StatelessWidget {
   final List<OrderEntity> orders;
@@ -23,15 +26,18 @@ class DeliveryTable extends StatelessWidget {
         children: [
           _buildHeader(l10n),
           Expanded(
-            child: ListView.separated(
-              physics: const ClampingScrollPhysics(),
-              itemCount: timeSlots.length,
-              separatorBuilder: (context, index) => const Divider(height: 1, color: Color(0xFFCECECE)),
-              itemBuilder: (context, index) {
-                final time = timeSlots[index];
-                final slotOrders = groupedOrders[time] ?? [];
-                return _buildTimeSlotRow(context, l10n, time, slotOrders);
-              },
+            child: SlidableAutoCloseBehavior(
+              child: ListView.separated(
+                physics: const ClampingScrollPhysics(),
+                itemCount: timeSlots.length,
+                separatorBuilder: (context, index) =>
+                    const Divider(height: 1, color: Color(0xFFCECECE)),
+                itemBuilder: (context, index) {
+                  final time = timeSlots[index];
+                  final slotOrders = groupedOrders[time] ?? [];
+                  return _buildTimeSlotRow(context, l10n, time, slotOrders);
+                },
+              ),
             ),
           ),
         ],
@@ -54,7 +60,8 @@ class DeliveryTable extends StatelessWidget {
     );
   }
 
-  Widget _buildHeaderCell(String label, {required int flex, bool isLast = false}) {
+  Widget _buildHeaderCell(String label,
+      {required int flex, bool isLast = false}) {
     return Expanded(
       flex: flex,
       child: Container(
@@ -68,7 +75,8 @@ class DeliveryTable extends StatelessWidget {
     );
   }
 
-  Widget _buildTimeSlotRow(BuildContext context, DashboardLocalizations l10n, String time, List<OrderEntity> orders) {
+  Widget _buildTimeSlotRow(BuildContext context, DashboardLocalizations l10n,
+      String time, List<OrderEntity> orders) {
     if (orders.isEmpty) {
       return IntrinsicHeight(
         child: Row(
@@ -97,31 +105,103 @@ class DeliveryTable extends StatelessWidget {
         final bgColor = _getBgColor(l10n, order);
         final showRequiredSign = order.signatureDate == null;
 
-        return IntrinsicHeight(
-          child: Container(
-            color: bgColor,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _buildCell(
-                  l10n,
-                  time,
-                  flex: 1,
-                  center: true,
-                  textStyle: const TextStyle(fontSize: 12, color: Colors.black),
+        return Slidable(
+          key: ValueKey(order.id),
+          endActionPane: ActionPane(
+            motion: const BehindMotion(),
+            extentRatio: 0.45,
+            children: [
+              // Copy action
+              CustomSlidableAction(
+                onPressed: (context) {
+                  context
+                      .read<DashboardBloc>()
+                      .add(DashboardEvent.copyOrder(order));
+                },
+                backgroundColor: const Color(0xFF3B82F6),
+                foregroundColor: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.copy, size: 20),
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.actionCopy,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                  ],
                 ),
-                const VerticalDivider(width: 1),
-                _buildCell(
-                  l10n,
-                  order.constructionSiteName,
-                  flex: 3,
-                  showRequiredSign: showRequiredSign,
-                  companyName: order.companyName,
-                  textStyle: const TextStyle(fontSize: 13, color: Color(0xFF1E293B)),
+              ),
+              // Edit action
+              CustomSlidableAction(
+                onPressed: (context) {
+                  context
+                      .read<DashboardBloc>()
+                      .add(DashboardEvent.editOrder(order));
+                },
+                backgroundColor: const Color(0xFFF59E0B),
+                foregroundColor: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.edit, size: 20),
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.actionEdit,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                  ],
                 ),
-                const VerticalDivider(width: 1),
-                _buildProductColumn(l10n, orderLines, flex: 3),
-              ],
+              ),
+              // Delete action
+              CustomSlidableAction(
+                onPressed: (context) {
+                  _showDeleteConfirmation(context, l10n, order);
+                },
+                backgroundColor: const Color(0xFFEF4444),
+                foregroundColor: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.delete, size: 20),
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.actionDelete,
+                      style: const TextStyle(fontSize: 11),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          child: IntrinsicHeight(
+            child: Container(
+              color: bgColor,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _buildCell(
+                    l10n,
+                    time,
+                    flex: 1,
+                    center: true,
+                    textStyle:
+                        const TextStyle(fontSize: 12, color: Colors.black),
+                  ),
+                  const VerticalDivider(width: 1),
+                  _buildCell(
+                    l10n,
+                    order.constructionSiteName,
+                    flex: 3,
+                    showRequiredSign: showRequiredSign,
+                    companyName: order.companyName,
+                    textStyle: const TextStyle(
+                        fontSize: 13, color: Color(0xFF1E293B)),
+                  ),
+                  const VerticalDivider(width: 1),
+                  _buildProductColumn(l10n, orderLines, flex: 3),
+                ],
+              ),
             ),
           ),
         );
@@ -129,11 +209,41 @@ class DeliveryTable extends StatelessWidget {
     );
   }
 
+  void _showDeleteConfirmation(
+      BuildContext context, DashboardLocalizations l10n, OrderEntity order) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: Text(l10n.deleteOrderConfirmTitle),
+          content: Text(l10n.deleteOrderConfirmMessage),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: Text(l10n.cancel),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+                context
+                    .read<DashboardBloc>()
+                    .add(DashboardEvent.deleteOrder(order));
+              },
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
+              child: Text(l10n.confirm),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Color? _getBgColor(DashboardLocalizations l10n, OrderEntity order) {
     if (order.deliveryStatus == l10n.statusCancelled) {
       return Colors.grey.shade300;
     }
-    if (order.receiptFileId != null || order.deliveryStatus == l10n.statusDelivered) {
+    if (order.receiptFileId != null ||
+        order.deliveryStatus == l10n.statusDelivered) {
       return Colors.green.shade50;
     }
     try {
@@ -155,7 +265,9 @@ class DeliveryTable extends StatelessWidget {
     return null;
   }
 
-  Widget _buildProductColumn(DashboardLocalizations l10n, List<OrderLineEntity> lines, {required int flex}) {
+  Widget _buildProductColumn(
+      DashboardLocalizations l10n, List<OrderLineEntity> lines,
+      {required int flex}) {
     return Expanded(
       flex: flex,
       child: Column(
@@ -174,7 +286,11 @@ class DeliveryTable extends StatelessWidget {
                 final isLast = entry.key == lines.length - 1;
                 return Container(
                   decoration: BoxDecoration(
-                    border: isLast ? null : Border(bottom: BorderSide(color: Colors.grey.shade300)),
+                    border: isLast
+                        ? null
+                        : Border(
+                            bottom:
+                                BorderSide(color: Colors.grey.shade300)),
                   ),
                   child: Row(
                     children: [
@@ -182,15 +298,21 @@ class DeliveryTable extends StatelessWidget {
                         l10n,
                         line.productName ?? '-',
                         flex: 2,
-                        textStyle: const TextStyle(fontSize: 13, color: Color(0xFF475569)),
+                        textStyle: const TextStyle(
+                            fontSize: 13, color: Color(0xFF475569)),
                       ),
                       const VerticalDivider(width: 1),
                       _buildCell(
                         l10n,
-                        line.quantity != null ? '${line.quantity!.toInt()}' : l10n.onSiteConfirmation,
+                        line.quantity != null
+                            ? '${line.quantity!.toInt()}'
+                            : l10n.onSiteConfirmation,
                         flex: 1,
                         alignRight: true,
-                        textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.black),
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                            color: Colors.black),
                       ),
                     ],
                   ),
@@ -215,12 +337,16 @@ class DeliveryTable extends StatelessWidget {
       child: Container(
         height: 48,
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        alignment: alignRight ? Alignment.centerRight : (center ? Alignment.center : Alignment.centerLeft),
+        alignment: alignRight
+            ? Alignment.centerRight
+            : (center ? Alignment.center : Alignment.centerLeft),
         child: RichText(
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           text: TextSpan(
-            style: textStyle ?? const TextStyle(color: Colors.black, fontSize: 13, height: 1.2),
+            style: textStyle ??
+                const TextStyle(
+                    color: Colors.black, fontSize: 13, height: 1.2),
             children: [
               if (companyName != null) ...[
                 TextSpan(
@@ -248,7 +374,8 @@ class DeliveryTable extends StatelessWidget {
     });
   }
 
-  Map<String, List<OrderEntity>> _groupOrders(List<String> slots, List<OrderEntity> orders) {
+  Map<String, List<OrderEntity>> _groupOrders(
+      List<String> slots, List<OrderEntity> orders) {
     final map = <String, List<OrderEntity>>{};
     for (var order in orders) {
       // Logic: map refuelingFromTime (HH:mm:ss) to nearest slot (HH:00)

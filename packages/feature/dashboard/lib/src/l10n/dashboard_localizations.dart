@@ -157,6 +157,54 @@ abstract class DashboardLocalizations {
   /// In en, this message translates to:
   /// **'No Data'**
   String get noData;
+
+  /// No description provided for @actionCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get actionCopy;
+
+  /// No description provided for @actionEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get actionEdit;
+
+  /// No description provided for @actionDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get actionDelete;
+
+  /// No description provided for @orderCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Order copied'**
+  String get orderCopied;
+
+  /// No description provided for @deleteOrderConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Order'**
+  String get deleteOrderConfirmTitle;
+
+  /// No description provided for @deleteOrderConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this order?'**
+  String get deleteOrderConfirmMessage;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
 }
 
 class _DashboardLocalizationsDelegate extends LocalizationsDelegate<DashboardLocalizations> {

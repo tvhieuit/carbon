@@ -10,5 +10,13 @@
   "statusCancelled": "Cancelled",
   "onSiteConfirmation": "On-site Conf.",
   "requiredSignature": " (Req. Sign)",
-  "noData": "No Data"
+  "noData": "No Data",
+  "actionCopy": "Copy",
+  "actionEdit": "Edit",
+  "actionDelete": "Delete",
+  "orderCopied": "Order copied",
+  "deleteOrderConfirmTitle": "Delete Order",
+  "deleteOrderConfirmMessage": "Are you sure you want to delete this order?",
+  "cancel": "Cancel",
+  "confirm": "Confirm"
 }
